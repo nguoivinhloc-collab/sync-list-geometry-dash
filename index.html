@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sync List - Geometry Dash</title>
+    <style>
+        /* 1. Phần thiết kế giao diện (CSS) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Màu nền tối */
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #00ffd4; /* Màu xanh neon đặc trưng */
+            text-shadow: 0 0 10px #00ffd4;
+            font-size: 3rem;
+        }
+
+        .list-container {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        /* Thẻ cho từng level */
+        .level-card {
+            background-color: #1e1e1e;
+            border-left: 5px solid #00ffd4;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: scale(1.02); /* Hiệu ứng phóng to nhẹ khi di chuột */
+            background-color: #252525;
+        }
+
+        .level-info h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .level-info p {
+            margin: 5px 0 0;
+            color: #aaaaaa;
+        }
+
+        .rank {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffd4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SYNC LIST</h1>
+
+    <div class="list-container">
+        <div class="level-card">
+            <div class="level-info">
+                <h2>#1 Bloodlust</h2>
+                <p>Creator: Knobbelboy | Difficulty: Extreme Demon</p>
+            </div>
+            <div class="rank">01</div>
+        </div>
+
+        <div class="level-card">
+            <div class="level-info">
+                <h2>#2 Zodiac</h2>
+                <p>Creator: Bianox & More | Difficulty: Extreme Demon</p>
+            </div>
+            <div class="rank">02</div>
+        </div>
+
+        </div>
+
+</body>
+</html>
