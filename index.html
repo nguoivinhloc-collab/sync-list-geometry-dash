@@ -5,63 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sync List - Geometry Dash</title>
     <style>
-        /* 1. Phần thiết kế giao diện (CSS) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Màu nền tối */
+            background-color: #0a0a0a; /* Tối hơn một chút để tăng độ tương phản */
             color: white;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
 
         h1 {
-            color: #00ffd4; /* Màu xanh neon đặc trưng */
-            text-shadow: 0 0 10px #00ffd4;
-            font-size: 3rem;
+            color: #00ffd4;
+            text-shadow: 0 0 15px rgba(0, 255, 212, 0.6);
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .list-container {
             width: 100%;
-            max-width: 800px;
-            margin-top: 20px;
+            max-width: 700px;
+            text-align: center;
         }
 
-        /* Thẻ cho từng level */
-        .level-card {
-            background-color: #1e1e1e;
-            border-left: 5px solid #00ffd4;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
+        /* Vùng hiển thị thông báo chờ */
+        .placeholder-box {
+            background-color: #161616;
+            border: 2px dashed #333; /* Đường viền đứt nét tạo cảm giác "đang chờ" */
+            padding: 40px;
+            border-radius: 15px;
+            transition: border-color 0.3s;
         }
 
-        .level-card:hover {
-            transform: scale(1.02); /* Hiệu ứng phóng to nhẹ khi di chuột */
-            background-color: #252525;
+        .placeholder-box:hover {
+            border-color: #00ffd4;
         }
 
-        .level-info h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #ffffff;
+        .placeholder-text {
+            font-size: 1.2rem;
+            color: #888;
+            line-height: 1.6;
+            font-style: italic;
         }
 
-        .level-info p {
-            margin: 5px 0 0;
-            color: #aaaaaa;
-        }
-
-        .rank {
-            font-size: 2rem;
-            font-weight: bold;
+        .highlight {
             color: #00ffd4;
+            font-weight: bold;
+            font-style: normal;
         }
     </style>
 </head>
@@ -70,23 +64,13 @@
     <h1>SYNC LIST</h1>
 
     <div class="list-container">
-        <div class="level-card">
-            <div class="level-info">
-                <h2>#1 Bloodlust</h2>
-                <p>Creator: Knobbelboy | Difficulty: Extreme Demon</p>
-            </div>
-            <div class="rank">01</div>
+        <div class="placeholder-box">
+            <p class="placeholder-text">
+                I will add the level here until you send me a 
+                <span class="highlight">"song click sync"</span> level.
+            </p>
         </div>
-
-        <div class="level-card">
-            <div class="level-info">
-                <h2>#2 Zodiac</h2>
-                <p>Creator: Bianox & More | Difficulty: Extreme Demon</p>
-            </div>
-            <div class="rank">02</div>
-        </div>
-
-        </div>
+    </div>
 
 </body>
 </html>
