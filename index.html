@@ -16,6 +16,7 @@
             --input-bg: #ffffff;
             --note-color: #666;
             --footer-bg: #f1f1f1;
+            --ad-bg: #eeeeee;
         }
 
         [data-theme="dark"] {
@@ -28,9 +29,9 @@
             --input-bg: #252525;
             --note-color: #aaa;
             --footer-bg: #111111;
+            --ad-bg: #1c1c1c;
         }
 
-        /* Structure to keep footer at bottom */
         html, body {
             height: 100%;
             margin: 0;
@@ -83,7 +84,7 @@
             color: var(--accent-color);
         }
 
-        /* Search Bar Styling */
+        /* Search Bar */
         .search-container {
             display: flex;
             align-items: center;
@@ -101,7 +102,7 @@
             padding: 5px;
         }
 
-        /* Theme Toggle Button */
+        /* Theme Toggle */
         #theme-toggle {
             background: none;
             border: none;
@@ -109,22 +110,51 @@
             cursor: pointer;
             margin-left: 10px;
             color: var(--text-color);
-            display: flex;
-            align-items: center;
         }
 
-        /* Main Content Styling */
+        /* Main Layout with Sidebars */
+        .page-content {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+            padding: 40px 20px;
+            gap: 20px;
+        }
+
         main {
-            flex: 1; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* Advertisement Sidebars */
+        .ad-sidebar {
+            width: 160px;
+            background-color: var(--ad-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            color: var(--note-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            writing-mode: vertical-rl; /* Text runs vertically */
+            letter-spacing: 3px;
+        }
+
+        /* Hide ads on mobile */
+        @media (max-width: 1000px) {
+            .ad-sidebar {
+                display: none;
+            }
         }
 
         h1 {
             color: var(--accent-color);
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 30px;
             letter-spacing: 2px;
             text-align: center;
@@ -132,12 +162,12 @@
 
         .placeholder-box {
             width: 100%;
-            max-width: 600px;
             background-color: var(--box-bg);
             border: 2px dashed var(--border-color);
             padding: 50px;
             border-radius: 15px;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .highlight {
@@ -149,17 +179,12 @@
             margin-top: 20px;
             font-size: 0.9rem;
             color: var(--note-color);
-            max-width: 550px;
             text-align: center;
             line-height: 1.5;
         }
 
-        .contact-note a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
+        .contact-note a { color: var(--accent-color); text-decoration: none; }
 
-        /* Footer Styling */
         footer {
             background-color: var(--footer-bg);
             color: var(--note-color);
@@ -178,34 +203,36 @@
             <a href="#">Home</a>
             <a href="#">News</a>
             <a href="#">Top List</a>
-            
             <div class="search-container">
                 <input type="text" placeholder="Search levels...">
                 <span>🔍</span>
             </div>
-            
-            <button id="theme-toggle">
-                <span id="theme-icon">☀️</span>
-            </button>
+            <button id="theme-toggle"><span id="theme-icon">☀️</span></button>
         </nav>
     </header>
 
-    <main>
-        <h1>SYNC LIST</h1>
+    <div class="page-content">
+        <aside class="ad-sidebar">Advertisement</aside>
 
-        <div class="placeholder-box">
-            <p style="font-style: italic; opacity: 0.8; margin: 0;">
-                I will add the level here until you send me a 
-                <span class="highlight">"song click sync"</span> level.
-            </p>
-        </div>
+        <main>
+            <h1>SYNC LIST</h1>
 
-        <div class="contact-note">
-            <strong>Note:</strong> You can send your ID and video about your level to 
-            <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a> 
-            or write in my YouTube channel.
-        </div>
-    </main>
+            <div class="placeholder-box">
+                <p style="font-style: italic; opacity: 0.8; margin: 0;">
+                    I will add the level here until you send me a 
+                    <span class="highlight">"song click sync"</span> level.
+                </p>
+            </div>
+
+            <div class="contact-note">
+                <strong>Note:</strong> You can send your ID and video about your level to 
+                <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a> 
+                or write in my YouTube channel.
+            </div>
+        </main>
+
+        <aside class="ad-sidebar">Advertisement</aside>
+    </div>
 
     <footer>
         Copyright © 2026 Hung [GD]
@@ -216,7 +243,6 @@
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        // Theme switching logic
         toggleBtn.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
