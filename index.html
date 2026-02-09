@@ -39,7 +39,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Header */
         header {
             background-color: var(--header-bg);
             padding: 10px 40px;
@@ -54,13 +53,12 @@
 
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); text-transform: uppercase; }
 
-        /* Main Layout */
         .page-content {
             display: flex;
             justify-content: center;
             flex: 1;
             padding: 20px;
-            gap: 40px;
+            gap: 30px;
         }
 
         main {
@@ -72,51 +70,51 @@
             padding-top: 40px;
         }
 
-        /* REAL ADS STYLING */
+        /* SIDEBAR ADS */
         .ad-sidebar {
             width: 160px;
             position: sticky;
             top: 80px;
-            height: fit-content;
+            height: 600px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .ad-label {
             font-size: 0.7rem;
-            color: var(--accent-color);
+            color: var(--note-color);
             text-align: center;
-            font-weight: bold;
             text-transform: uppercase;
         }
 
-        .ad-link {
-            display: block;
-            border: 2px solid var(--accent-color);
+        .ad-container {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: var(--box-bg);
         }
 
-        .ad-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px var(--accent-color);
+        .ad-container:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
         }
 
-        .ad-link img {
+        .ad-container img {
             width: 100%;
-            display: block;
-            height: auto;
+            height: 100%;
+            object-fit: cover; /* Makes the image fill the container */
         }
 
-        /* Hide ads on small screens */
-        @media (max-width: 1150px) {
+        /* Hide ads if screen is too narrow */
+        @media (max-width: 1100px) {
             .ad-sidebar { display: none; }
         }
 
-        h1 { color: var(--accent-color); font-size: 3rem; margin-bottom: 20px; }
+        h1 { color: var(--accent-color); font-size: 3rem; margin-bottom: 20px; text-align: center; }
 
         .placeholder-box {
             width: 100%;
@@ -135,7 +133,7 @@
             color: var(--note-color);
             text-align: center;
             padding: 20px 0;
-            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
@@ -146,6 +144,7 @@
         <nav style="display: flex; gap: 20px; align-items: center;">
             <a href="#" style="text-decoration: none; color: var(--text-color);">Home</a>
             <a href="#" style="text-decoration: none; color: var(--text-color);">News</a>
+            <a href="#" style="text-decoration: none; color: var(--text-color);">Top List</a>
             <button id="theme-toggle" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--text-color);">
                 <span id="theme-icon">☀️</span>
             </button>
@@ -154,10 +153,12 @@
 
     <div class="page-content">
         <aside class="ad-sidebar">
-            <div class="ad-label">Sponsored</div>
-            <a href="https://www.roblox.com" target="_blank" class="ad-link">
-                <img src="https://via.placeholder.com/160x600/00b395/ffffff?text=Play+Geometry+Dash+Clone" alt="Ad">
-            </a>
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-container">
+                <a href="https://www.robtopgames.com/" target="_blank">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6A7-v0LqfE0I7t3xYfS_0X_YpM1n5-H4uZw&s" alt="GD Ad">
+                </a>
+            </div>
         </aside>
 
         <main>
@@ -168,17 +169,19 @@
                     <span class="highlight">"song click sync"</span> level.
                 </p>
             </div>
-            <div style="margin-top: 20px; color: var(--note-color); text-align: center;">
+            <div style="margin-top: 20px; font-size: 0.9rem; text-align: center;">
                 <strong>Note:</strong> Send ID/Video to 
-                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--accent-color);">nguoivinhloc@gmail.com</a>
+                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--accent-color); text-decoration: none;">nguoivinhloc@gmail.com</a>
             </div>
         </main>
 
         <aside class="ad-sidebar">
             <div class="ad-label">Sponsored</div>
-            <a href="https://store.steampowered.com/app/22210/Geometry_Dash/" target="_blank" class="ad-link">
-                <img src="https://via.placeholder.com/160x600/000000/00ffd4?text=Buy+GD+on+Steam" alt="Ad">
-            </a>
+            <div class="ad-container">
+                <a href="https://store.steampowered.com/" target="_blank">
+                    <img src="https://img.freepik.com/free-vector/pixel-art-game-background_23-2148529202.jpg" alt="Game Ad">
+                </a>
+            </div>
         </aside>
     </div>
 
