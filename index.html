@@ -14,6 +14,7 @@
             --box-bg: #f4f4f4;
             --border-color: #ddd;
             --input-bg: #ffffff;
+            --note-color: #666;
         }
 
         [data-theme="dark"] {
@@ -24,6 +25,7 @@
             --box-bg: #1a1a1a;
             --border-color: #333;
             --input-bg: #252525;
+            --note-color: #aaa;
         }
 
         body {
@@ -91,7 +93,7 @@
             padding: 5px;
         }
 
-        /* Theme Toggle Button in Header */
+        /* Theme Toggle Button */
         #theme-toggle {
             background: none;
             border: none;
@@ -114,6 +116,7 @@
             font-size: 3.5rem;
             margin-bottom: 30px;
             letter-spacing: 2px;
+            text-align: center;
         }
 
         .placeholder-box {
@@ -130,22 +133,38 @@
             color: var(--accent-color);
             font-weight: bold;
         }
+
+        /* Note Section Styling */
+        .contact-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--note-color);
+            max-width: 550px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .contact-note a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-note a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">Sync List</div>
-        
         <nav>
             <a href="#">Home</a>
             <a href="#">Top List</a>
-            
             <div class="search-container">
                 <input type="text" placeholder="Search levels...">
                 <span>🔍</span>
             </div>
-
             <button id="theme-toggle">
                 <span id="theme-icon">☀️</span>
             </button>
@@ -156,10 +175,16 @@
         <h1>SYNC LIST</h1>
 
         <div class="placeholder-box">
-            <p style="font-style: italic; opacity: 0.8;">
+            <p style="font-style: italic; opacity: 0.8; margin: 0;">
                 I will add the level here until you send me a 
                 <span class="highlight">"song click sync"</span> level.
             </p>
+        </div>
+
+        <div class="contact-note">
+            <strong>Note:</strong> You can send your ID and video about your level to 
+            <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a> 
+            or write in my YouTube channel.
         </div>
     </main>
 
@@ -168,7 +193,6 @@
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        // Theme switching logic
         toggleBtn.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
