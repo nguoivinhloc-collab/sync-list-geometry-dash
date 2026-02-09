@@ -5,135 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sync List - Geometry Dash</title>
     <style>
-        /* Define color variables for easy switching */
+        /* CSS Variables for Theme Management */
         :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
-            --accent-color: #00b395; /* Slightly darker teal for light mode */
+            --accent-color: #00b395;
+            --header-bg: #f8f8f8;
             --box-bg: #f4f4f4;
             --border-color: #ddd;
+            --input-bg: #ffffff;
         }
 
-        /* Dark mode colors */
         [data-theme="dark"] {
             --bg-color: #0a0a0a;
             --text-color: #ffffff;
             --accent-color: #00ffd4;
-            --box-bg: #161616;
+            --header-bg: #161616;
+            --box-bg: #1a1a1a;
             --border-color: #333;
+            --input-bg: #252525;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--header-bg);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .search-container input {
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            outline: none;
+            padding: 5px;
+        }
+
+        /* Theme Toggle Button in Header */
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+            color: var(--text-color);
+        }
+
+        /* Main Content Styling */
+        main {
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* Theme Toggle Button */
-        #theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--box-bg);
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            width: 50px;
-            height: 50px;
-        }
-
-        #theme-toggle:hover {
-            transform: rotate(20deg) scale(1.1);
+            padding: 60px 20px;
         }
 
         h1 {
             color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(0, 255, 212, 0.3);
             font-size: 3.5rem;
             margin-bottom: 30px;
-            text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .list-container {
-            width: 100%;
-            max-width: 700px;
-            text-align: center;
-        }
-
         .placeholder-box {
+            width: 100%;
+            max-width: 600px;
             background-color: var(--box-bg);
             border: 2px dashed var(--border-color);
-            padding: 40px;
+            padding: 50px;
             border-radius: 15px;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        .placeholder-box:hover {
-            border-color: var(--accent-color);
-        }
-
-        .placeholder-text {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            opacity: 0.7;
-            line-height: 1.6;
-            font-style: italic;
+            text-align: center;
         }
 
         .highlight {
             color: var(--accent-color);
             font-weight: bold;
-            font-style: normal;
         }
     </style>
 </head>
 <body>
 
-    <button id="theme-toggle" title="Toggle Light/Dark Mode">
-        <span id="theme-icon">☀️</span>
-    </button>
+    <header>
+        <div class="logo">Sync List</div>
+        
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Top List</a>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search levels...">
+                <span>🔍</span>
+            </div>
 
-    <h1>SYNC LIST</h1>
+            <button id="theme-toggle">
+                <span id="theme-icon">☀️</span>
+            </button>
+        </nav>
+    </header>
 
-    <div class="list-container">
+    <main>
+        <h1>SYNC LIST</h1>
+
         <div class="placeholder-box">
-            <p class="placeholder-text">
+            <p style="font-style: italic; opacity: 0.8;">
                 I will add the level here until you send me a 
                 <span class="highlight">"song click sync"</span> level.
             </p>
         </div>
-    </div>
+    </main>
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        // Logic to switch themes
+        // Theme switching logic
         toggleBtn.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
-                // Switch to Light Mode
                 body.removeAttribute('data-theme');
-                themeIcon.textContent = '☀️'; // Sun icon
+                themeIcon.textContent = '☀️';
             } else {
-                // Switch to Dark Mode
                 body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '🌙'; // Moon icon
+                themeIcon.textContent = '🌙';
             }
         });
     </script>
