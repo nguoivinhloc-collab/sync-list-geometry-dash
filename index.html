@@ -109,11 +109,13 @@
             cursor: pointer;
             margin-left: 10px;
             color: var(--text-color);
+            display: flex;
+            align-items: center;
         }
 
         /* Main Content Styling */
         main {
-            flex: 1; /* Pushes footer to the bottom */
+            flex: 1; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -174,11 +176,14 @@
         <div class="logo">Sync List</div>
         <nav>
             <a href="#">Home</a>
+            <a href="#">News</a>
             <a href="#">Top List</a>
+            
             <div class="search-container">
                 <input type="text" placeholder="Search levels...">
                 <span>🔍</span>
             </div>
+            
             <button id="theme-toggle">
                 <span id="theme-icon">☀️</span>
             </button>
@@ -211,6 +216,7 @@
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
+        // Theme switching logic
         toggleBtn.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
