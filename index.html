@@ -15,6 +15,7 @@
             --border-color: #ddd;
             --input-bg: #ffffff;
             --note-color: #666;
+            --footer-bg: #f1f1f1;
         }
 
         [data-theme="dark"] {
@@ -26,14 +27,21 @@
             --border-color: #333;
             --input-bg: #252525;
             --note-color: #aaa;
+            --footer-bg: #111111;
+        }
+
+        /* Structure to keep footer at bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
         }
 
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
             transition: all 0.3s ease;
         }
 
@@ -105,6 +113,7 @@
 
         /* Main Content Styling */
         main {
+            flex: 1; /* Pushes footer to the bottom */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -134,7 +143,6 @@
             font-weight: bold;
         }
 
-        /* Note Section Styling */
         .contact-note {
             margin-top: 20px;
             font-size: 0.9rem;
@@ -149,8 +157,14 @@
             text-decoration: none;
         }
 
-        .contact-note a:hover {
-            text-decoration: underline;
+        /* Footer Styling */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--note-color);
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -187,6 +201,10 @@
             or write in my YouTube channel.
         </div>
     </main>
+
+    <footer>
+        Copyright © 2026 Hung [GD]
+    </footer>
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
