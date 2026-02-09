@@ -13,10 +13,8 @@
             --header-bg: #f8f8f8;
             --box-bg: #f4f4f4;
             --border-color: #ddd;
-            --input-bg: #ffffff;
             --note-color: #666;
             --footer-bg: #f1f1f1;
-            --ad-bg: #ffeeba; /* Noticeable yellow for light mode */
         }
 
         [data-theme="dark"] {
@@ -26,10 +24,8 @@
             --header-bg: #161616;
             --box-bg: #1a1a1a;
             --border-color: #333;
-            --input-bg: #252525;
             --note-color: #aaa;
             --footer-bg: #111111;
-            --ad-bg: #2d2d00; /* Dark gold for dark mode */
         }
 
         html, body { height: 100%; margin: 0; }
@@ -43,6 +39,7 @@
             transition: all 0.3s ease;
         }
 
+        /* Header */
         header {
             background-color: var(--header-bg);
             padding: 10px 40px;
@@ -57,17 +54,13 @@
 
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); text-transform: uppercase; }
 
-        nav { display: flex; gap: 20px; align-items: center; }
-        nav a { text-decoration: none; color: var(--text-color); font-weight: 500; }
-
-        /* Main Layout with Sidebars */
+        /* Main Layout */
         .page-content {
             display: flex;
             justify-content: center;
             flex: 1;
             padding: 20px;
-            gap: 30px;
-            position: relative;
+            gap: 40px;
         }
 
         main {
@@ -79,51 +72,51 @@
             padding-top: 40px;
         }
 
-        /* Visible Advertisement Sidebars */
+        /* REAL ADS STYLING */
         .ad-sidebar {
             width: 160px;
-            height: 600px; /* Standard tall ad size */
-            background-color: var(--ad-bg);
-            border: 2px solid var(--accent-color);
-            border-radius: 10px;
             position: sticky;
-            top: 80px; /* Sticks below the header */
+            top: 80px;
+            height: fit-content;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
+            gap: 15px;
         }
 
         .ad-label {
             font-size: 0.7rem;
             color: var(--accent-color);
-            margin-bottom: 10px;
+            text-align: center;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        /* Mock Ad Image */
-        .ad-box {
-            width: 100%;
-            height: 80%;
-            background: #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
+        .ad-link {
+            display: block;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Hide ads on small screens to prevent overlap */
-        @media (max-width: 1100px) {
+        .ad-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px var(--accent-color);
+        }
+
+        .ad-link img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* Hide ads on small screens */
+        @media (max-width: 1150px) {
             .ad-sidebar { display: none; }
         }
 
-        h1 { color: var(--accent-color); font-size: 3rem; margin-bottom: 20px; text-align: center; }
+        h1 { color: var(--accent-color); font-size: 3rem; margin-bottom: 20px; }
 
         .placeholder-box {
             width: 100%;
@@ -137,15 +130,12 @@
 
         .highlight { color: var(--accent-color); font-weight: bold; }
 
-        .contact-note { margin-top: 20px; font-size: 0.9rem; color: var(--note-color); text-align: center; }
-        .contact-note a { color: var(--accent-color); text-decoration: none; }
-
         footer {
             background-color: var(--footer-bg);
             color: var(--note-color);
             text-align: center;
             padding: 20px 0;
-            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -153,18 +143,21 @@
 
     <header>
         <div class="logo">Sync List</div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">News</a>
-            <a href="#">Top List</a>
-            <button id="theme-toggle"><span id="theme-icon">☀️</span></button>
+        <nav style="display: flex; gap: 20px; align-items: center;">
+            <a href="#" style="text-decoration: none; color: var(--text-color);">Home</a>
+            <a href="#" style="text-decoration: none; color: var(--text-color);">News</a>
+            <button id="theme-toggle" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--text-color);">
+                <span id="theme-icon">☀️</span>
+            </button>
         </nav>
     </header>
 
     <div class="page-content">
         <aside class="ad-sidebar">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-box">Your Ad Here</div>
+            <div class="ad-label">Sponsored</div>
+            <a href="https://www.roblox.com" target="_blank" class="ad-link">
+                <img src="https://via.placeholder.com/160x600/00b395/ffffff?text=Play+Geometry+Dash+Clone" alt="Ad">
+            </a>
         </aside>
 
         <main>
@@ -175,15 +168,17 @@
                     <span class="highlight">"song click sync"</span> level.
                 </p>
             </div>
-            <div class="contact-note">
+            <div style="margin-top: 20px; color: var(--note-color); text-align: center;">
                 <strong>Note:</strong> Send ID/Video to 
-                <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a>
+                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--accent-color);">nguoivinhloc@gmail.com</a>
             </div>
         </main>
 
         <aside class="ad-sidebar">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-box">Your Ad Here</div>
+            <div class="ad-label">Sponsored</div>
+            <a href="https://store.steampowered.com/app/22210/Geometry_Dash/" target="_blank" class="ad-link">
+                <img src="https://via.placeholder.com/160x600/000000/00ffd4?text=Buy+GD+on+Steam" alt="Ad">
+            </a>
         </aside>
     </div>
 
