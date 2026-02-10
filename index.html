@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sync List - Geometry Dash</title>
     <style>
-        /* CSS Variables */
+        /* CSS Variables for Theme Management */
         :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
@@ -14,6 +14,7 @@
             --box-bg: #f4f4f4;
             --border-color: #ddd;
             --note-color: #666;
+            --footer-bg: #f1f1f1;
         }
 
         [data-theme="dark"] {
@@ -24,19 +25,24 @@
             --box-bg: #1a1a1a;
             --border-color: #333;
             --note-color: #aaa;
+            --footer-bg: #111111;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
+        /* Header Styling */
         header {
             background-color: var(--header-bg);
             padding: 15px 40px;
@@ -49,129 +55,164 @@
             z-index: 1000;
         }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); text-transform: uppercase; }
-
-        .layout-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            gap: 40px;
-            flex: 1;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* Sidebar Ads */
-        .ad-sidebar {
-            width: 160px;
-            position: sticky;
-            top: 100px;
-            height: 600px;
+        nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            align-items: center;
+            justify-content: center; /* Center content vertically */
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        .ad-label {
-            font-size: 0.7rem;
-            text-align: center;
-            font-weight: bold;
-            color: var(--note-color);
+        h1 {
+            color: var(--accent-color);
+            font-size: 4rem;
+            margin: 0 0 30px 0;
+            letter-spacing: -1px;
             text-transform: uppercase;
         }
 
-        .ad-image {
-            width: 100%;
-            height: 100%;
-            border: 3px solid var(--accent-color);
-            border-radius: 10px;
-            object-fit: cover;
-            background-color: #111;
-            transition: transform 0.3s;
-        }
-
-        .ad-image:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 15px var(--accent-color);
-        }
-
-        main { width: 100%; max-width: 650px; text-align: center; }
-        h1 { color: var(--accent-color); font-size: 3.5rem; margin: 0 0 20px 0; }
-
         .placeholder-box {
+            width: 100%;
+            max-width: 600px;
             background-color: var(--box-bg);
-            border: 2px dashed var(--border-color);
-            padding: 60px 20px;
+            border: 3px dashed var(--border-color);
+            padding: 60px 40px;
             border-radius: 20px;
+            box-sizing: border-box;
         }
 
-        .highlight { color: var(--accent-color); font-weight: bold; }
+        .placeholder-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin: 0;
+        }
 
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .contact-note {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: var(--note-color);
+            line-height: 1.6;
+        }
+
+        .contact-note a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Footer Styling */
         footer {
-            padding: 20px;
+            background-color: var(--footer-bg);
+            color: var(--note-color);
             text-align: center;
+            padding: 25px 0;
             border-top: 1px solid var(--border-color);
             font-size: 0.9rem;
-            color: var(--note-color);
         }
-
-        @media (max-width: 1100px) { .ad-sidebar { display: none; } }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">Sync List</div>
-        <nav style="display: flex; gap: 20px; align-items: center;">
-            <a href="#" style="text-decoration: none; color: var(--text-color); font-weight: bold;">Home</a>
-            <a href="#" style="text-decoration: none; color: var(--text-color); font-weight: bold;">News</a>
-            <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">News</a>
+            <a href="#">Top List</a>
+            <button id="theme-toggle" title="Toggle Light/Dark Mode">
+                <span id="theme-icon">☀️</span>
+            </button>
         </nav>
     </header>
 
-    <div class="layout-wrapper">
-        <aside class="ad-sidebar">
-            <div class="ad-label">Sponsored</div>
-            <a href="https://www.robtopgames.com/" target="_blank">
-                <img src="https://pbs.twimg.com/media/GBv7S3mX0AA9_80?format=jpg&name=large" class="ad-image" alt="GD 2.2">
-            </a>
-        </aside>
+    <main>
+        <h1>SYNC LIST</h1>
 
-        <main>
-            <h1>SYNC LIST</h1>
-            <div class="placeholder-box">
-                <p style="font-style: italic; font-size: 1.2rem;">
-                    I will add the level here until you send me a 
-                    <span class="highlight">"song click sync"</span> level.
-                </p>
-            </div>
-            <div style="margin-top: 25px; font-size: 0.95rem; color: var(--note-color);">
-                <strong>Note:</strong> Send ID and video to <br>
-                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">nguoivinhloc@gmail.com</a> 
-                or write in my YouTube channel.
-            </div>
-        </main>
+        <div class="placeholder-box">
+            <p class="placeholder-text">
+                I will add the level here until you send me a 
+                <span class="highlight">"song click sync"</span> level.
+            </p>
+        </div>
 
-        <aside class="ad-sidebar">
-            <div class="ad-label">Sponsored</div>
-            <a href="https://store.steampowered.com/app/22210/Geometry_Dash/" target="_blank">
-                <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22210/library_600x900.jpg" class="ad-image" alt="Steam GD">
-            </a>
-        </aside>
-    </div>
+        <div class="contact-note">
+            <strong>Note:</strong> You can send your ID and video about your level to <br>
+            <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a> 
+            or write in my YouTube channel.
+        </div>
+    </main>
 
-    <footer>Copyright © 2026 Hung [GD]</footer>
+    <footer>
+        Copyright © 2026 Hung [GD]
+    </footer>
 
     <script>
-        const btn = document.getElementById('theme-toggle');
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
-        btn.onclick = () => {
+
+        // Theme switching logic
+        toggleBtn.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
-                btn.innerText = '☀️';
+                themeIcon.textContent = '☀️';
             } else {
                 body.setAttribute('data-theme', 'dark');
-                btn.innerText = '🌙';
+                themeIcon.textContent = '🌙';
             }
-        };
+        });
     </script>
 </body>
 </html>
