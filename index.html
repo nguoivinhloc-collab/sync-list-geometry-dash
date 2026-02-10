@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sync List - Geometry Dash</title>
     <style>
-        /* CSS Variables for Theme Management */
+        /* CSS Variables */
         :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
@@ -13,6 +13,7 @@
             --header-bg: #f8f8f8;
             --box-bg: #f4f4f4;
             --border-color: #ddd;
+            --input-bg: #ffffff;
             --note-color: #666;
             --footer-bg: #f1f1f1;
         }
@@ -24,14 +25,12 @@
             --header-bg: #161616;
             --box-bg: #1a1a1a;
             --border-color: #333;
+            --input-bg: #252525;
             --note-color: #aaa;
             --footer-bg: #111111;
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
+        html, body { height: 100%; margin: 0; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,13 +38,13 @@
             color: var(--text-color);
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
         /* Header Styling */
         header {
             background-color: var(--header-bg);
-            padding: 15px 40px;
+            padding: 10px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,111 +54,76 @@
             z-index: 1000;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; }
 
-        nav {
+        nav { display: flex; gap: 20px; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: 0.2s; }
+        nav a:hover { color: var(--accent-color); }
+
+        /* Search Bar Styling */
+        .search-container {
             display: flex;
-            gap: 25px;
             align-items: center;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            margin: 0 10px;
+            transition: border-color 0.3s;
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: color 0.2s;
+        .search-container:focus-within {
+            border-color: var(--accent-color);
         }
 
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Theme Toggle Button */
-        #theme-toggle {
-            background: none;
+        .search-container input {
             border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
+            background: transparent;
             color: var(--text-color);
-            display: flex;
-            align-items: center;
-            transition: transform 0.2s;
+            outline: none;
+            padding: 4px;
+            width: 150px;
+            font-size: 0.9rem;
         }
 
-        #theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* Main Content Styling */
+        /* Content Styling */
         main {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
             padding: 40px 20px;
             text-align: center;
         }
 
-        h1 {
-            color: var(--accent-color);
-            font-size: 4rem;
-            margin: 0 0 30px 0;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
+        h1 { color: var(--accent-color); font-size: 4rem; margin-bottom: 20px; text-transform: uppercase; }
 
         .placeholder-box {
             width: 100%;
             max-width: 600px;
             background-color: var(--box-bg);
             border: 3px dashed var(--border-color);
-            padding: 60px 40px;
+            padding: 60px 20px;
             border-radius: 20px;
-            box-sizing: border-box;
         }
 
-        .placeholder-text {
-            font-size: 1.4rem;
-            font-style: italic;
-            opacity: 0.9;
-            line-height: 1.5;
-            margin: 0;
-        }
+        .contact-note { margin-top: 30px; font-size: 1rem; color: var(--note-color); line-height: 1.6; }
+        .contact-note a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
 
-        .highlight {
-            color: var(--accent-color);
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        .contact-note {
-            margin-top: 30px;
-            font-size: 1rem;
-            color: var(--note-color);
-            line-height: 1.6;
-        }
-
-        .contact-note a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Footer Styling */
         footer {
             background-color: var(--footer-bg);
             color: var(--note-color);
             text-align: center;
-            padding: 25px 0;
+            padding: 20px 0;
             border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
+        }
+
+        #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--text-color); }
+
+        @media (max-width: 768px) {
+            header { padding: 10px 20px; flex-direction: column; gap: 10px; }
+            .search-container { margin: 5px 0; width: 80%; }
         }
     </style>
 </head>
@@ -170,49 +134,44 @@
         <nav>
             <a href="#">Home</a>
             <a href="#">News</a>
-            <a href="#">Top List</a>
-            <button id="theme-toggle" title="Toggle Light/Dark Mode">
-                <span id="theme-icon">☀️</span>
-            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search levels...">
+                <span style="cursor: pointer; opacity: 0.7;">🔍</span>
+            </div>
+
+            <button id="theme-toggle">☀️</button>
         </nav>
     </header>
 
     <main>
         <h1>SYNC LIST</h1>
-
         <div class="placeholder-box">
-            <p class="placeholder-text">
+            <p style="font-size: 1.3rem; font-style: italic; margin: 0;">
                 I will add the level here until you send me a 
-                <span class="highlight">"song click sync"</span> level.
+                <span style="color: var(--accent-color); font-weight: bold; font-style: normal;">"song click sync"</span> level.
             </p>
         </div>
-
         <div class="contact-note">
-            <strong>Note:</strong> You can send your ID and video about your level to <br>
-            <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a> 
-            or write in my YouTube channel.
+            <strong>Note:</strong> Send your ID and video to <br>
+            <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a>
         </div>
     </main>
 
-    <footer>
-        Copyright © 2026 Hung [GD]
-    </footer>
+    <footer>Copyright © 2026 Hung [GD]</footer>
 
     <script>
-        const toggleBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
+        const btn = document.getElementById('theme-toggle');
         const body = document.body;
-
-        // Theme switching logic
-        toggleBtn.addEventListener('click', () => {
+        btn.onclick = () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
-                themeIcon.textContent = '☀️';
+                btn.innerText = '☀️';
             } else {
                 body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '🌙';
+                btn.innerText = '🌙';
             }
-        });
+        };
     </script>
 </body>
 </html>
