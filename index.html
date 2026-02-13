@@ -13,7 +13,7 @@
             --card-bg: #f9f9f9;
             --header-bg: rgba(255, 255, 255, 0.9);
             --border: #eeeeee;
-            --rank-1: #ffcc00; /* Màu vàng cho Top 1 */
+            --rank-1: #ffcc00;
         }
 
         [data-theme="dark"] {
@@ -56,89 +56,68 @@
         }
 
         nav { display: flex; gap: 20px; align-items: center; }
+        nav a { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; }
         
-        .search-box {
-            display: flex; align-items: center;
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 20px; padding: 5px 15px;
+        /* NEWS MODAL STYLING */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
         }
 
-        .search-box input {
-            background: none; border: none; color: var(--text); outline: none; width: 150px; margin-left: 8px;
-        }
-
-        main {
-            flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
-        }
-
-        h1 {
-            font-size: 4rem; margin: 0 0 40px 0; font-weight: 900;
-            background: linear-gradient(to bottom, var(--text) 50%, var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-        }
-
-        /* Danh sách Level */
-        .level-list {
-            width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px;
-        }
-
-        .level-card {
-            background: var(--card-bg);
-            border: 2px solid var(--border);
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 30px;
+            border: 2px solid var(--primary);
+            width: 80%; max-width: 500px;
             border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: 0.3s;
+            text-align: center;
+            box-shadow: 0 0 30px var(--primary-glow);
             position: relative;
-            overflow: hidden;
         }
 
-        /* Hiệu ứng đặc biệt cho TOP 1 */
-        .level-card.top-1 {
-            border-color: var(--rank-1);
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+        .close-btn {
+            position: absolute; right: 20px; top: 15px;
+            font-size: 28px; font-weight: bold; cursor: pointer; color: var(--text);
         }
 
-        .level-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .news-title {
+            font-size: 1.8rem; font-weight: 800; color: var(--primary);
+            margin-bottom: 20px; text-transform: uppercase;
         }
 
-        .level-info { display: flex; align-items: center; gap: 25px; }
-
-        .rank {
-            font-size: 2.5rem; font-weight: 900; color: var(--rank-1); min-width: 50px;
+        .fun-fact-box {
+            background: rgba(0, 179, 149, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.6;
+            border-left: 5px solid var(--primary);
         }
 
-        .details { text-align: left; }
+        /* Styles cho phần chính */
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+        h1 { font-size: 4rem; margin-bottom: 40px; font-weight: 900; text-transform: uppercase; }
+
+        .level-list { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
+        .level-card {
+            background: var(--card-bg); border: 2px solid var(--border);
+            border-radius: 20px; padding: 25px; display: flex;
+            align-items: center; justify-content: space-between; transition: 0.3s;
+        }
+        .level-card.top-1 { border-color: var(--rank-1); box-shadow: 0 0 20px rgba(255, 204, 0, 0.1); }
+        .rank { font-size: 2.5rem; font-weight: 900; color: var(--rank-1); min-width: 50px; }
         .level-name { font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--primary); }
-        .creator { font-size: 1rem; opacity: 0.7; margin: 5px 0; }
-        .level-meta { font-size: 0.85rem; font-family: monospace; opacity: 0.6; }
 
-        .no-video {
-            font-size: 0.8rem; background: #444; color: #fff;
-            padding: 5px 12px; border-radius: 10px; opacity: 0.5;
-        }
+        footer { text-align: center; padding: 25px; font-size: 0.9rem; opacity: 0.7; border-top: 1px solid var(--border); }
+        #theme-btn { background: none; border: 1px solid var(--border); padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
 
-        footer {
-            text-align: center; padding: 25px; font-size: 0.9rem; opacity: 0.7;
-            border-top: 1px solid var(--border); background: var(--card-bg);
-        }
-
-        #theme-btn {
-            background: none; border: 1px solid var(--border); padding: 8px;
-            border-radius: 50%; cursor: pointer; color: var(--text);
-            width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .level-card { flex-direction: column; text-align: center; gap: 15px; }
-            .details { text-align: center; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -146,55 +125,67 @@
     <header>
         <div class="logo">Sync List</div>
         <nav>
-            <div class="search-box">
-                <span>🔍</span>
-                <input type="text" placeholder="Search levels...">
-            </div>
-            <a href="#" style="text-decoration: none; color: var(--text); font-weight: 600;">Home</a>
-            <a href="#" style="text-decoration: none; color: var(--text); font-weight: 600;">News</a>
+            <a href="#">Home</a>
+            <a id="news-link">News</a>
             <button id="theme-btn">🌙</button>
         </nav>
     </header>
 
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="news-title">Latest News</div>
+            <div class="fun-fact-box">
+                <p style="font-size: 1.1rem; margin: 0;">
+                    💡 <strong>Fun fact:</strong> The first top 1 level (Creator: <strong>plusgdinues</strong>) is my level (LOL) 🤣
+                </p>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.6; font-size: 0.8rem;">Updated: February 2026</p>
+        </div>
+    </div>
+
     <main>
         <h1>SYNC LIST</h1>
-
         <div class="level-list">
             <div class="level-card top-1">
-                <div class="level-info">
+                <div style="display: flex; align-items: center; gap: 25px;">
                     <div class="rank">#1</div>
-                    <div class="details">
+                    <div style="text-align: left;">
                         <p class="level-name">Montagem Rebola Layout</p>
-                        <p class="creator">by <strong>plusgdinues</strong></p>
-                        <p class="level-meta">ID: [WAITING...] • SONG CLICK SYNC</p>
+                        <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
+                        <p style="font-size: 0.85rem; opacity: 0.6; font-family: monospace;">ID: [WAITING...] • SONG CLICK SYNC</p>
                     </div>
                 </div>
-                <div class="no-video">NO VIDEO AVAILABLE</div>
-            </div>
-
-            <div style="margin-top: 30px; opacity: 0.6; font-style: italic; font-size: 0.9rem; text-align: center;">
-                Waiting for more submissions... <br>
-                Send ID & Video to <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary);">nguoivinhloc@gmail.com</a>
+                <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
             </div>
         </div>
     </main>
 
-    <footer>
-        Copyright © 2026 HUNG [GD] - All right reversed 
-    </footer>
+    <footer>Copyright © 2026 HUNG [GD] - All right reversed</footer>
 
     <script>
-        const btn = document.getElementById('theme-btn');
-        const body = document.body;
-        btn.onclick = () => {
-            if (body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
-                btn.innerText = '☀️';
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.onclick = () => {
+            if (document.body.hasAttribute('data-theme')) {
+                document.body.removeAttribute('data-theme');
+                themeBtn.innerText = '🌙';
             } else {
-                body.setAttribute('data-theme', 'dark');
-                btn.innerText = '🌙';
+                document.body.setAttribute('data-theme', 'dark');
+                themeBtn.innerText = '☀️';
             }
         };
+
+        // News Modal Logic
+        const modal = document.getElementById("news-modal");
+        const newsLink = document.getElementById("news-link");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
+
+        newsLink.onclick = () => modal.style.display = "block";
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = "none";
+        }
     </script>
 </body>
 </html>
