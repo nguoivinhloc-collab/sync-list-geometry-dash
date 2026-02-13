@@ -13,6 +13,7 @@
             --card-bg: #f9f9f9;
             --header-bg: rgba(255, 255, 255, 0.9);
             --border: #eeeeee;
+            --rank-1: #ffcc00; /* Màu vàng cho Top 1 */
         }
 
         [data-theme="dark"] {
@@ -44,109 +45,99 @@
             background: var(--header-bg);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 900;
+            font-size: 1.4rem; font-weight: 900;
             background: linear-gradient(90deg, var(--primary), #00a3ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; letter-spacing: 2px;
         }
 
-        nav { display: flex; gap: 25px; align-items: center; }
+        nav { display: flex; gap: 20px; align-items: center; }
         
         .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 5px 15px;
+            display: flex; align-items: center;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 20px; padding: 5px 15px;
         }
 
         .search-box input {
-            background: none;
-            border: none;
-            color: var(--text);
-            outline: none;
-            width: 150px;
-            margin-left: 8px;
+            background: none; border: none; color: var(--text); outline: none; width: 150px; margin-left: 8px;
         }
 
         main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
         }
 
         h1 {
-            font-size: 4.5rem;
-            margin: 0 0 10px 0;
-            font-weight: 900;
+            font-size: 4rem; margin: 0 0 40px 0; font-weight: 900;
             background: linear-gradient(to bottom, var(--text) 50%, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
 
-        .main-card {
+        /* Danh sách Level */
+        .level-list {
+            width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px;
+        }
+
+        .level-card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 50px 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: 0.3s;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Thanh màu phía trên Card */
-        .main-card::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 4px;
-            background: var(--primary);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 0 15px var(--primary-glow);
+        /* Hiệu ứng đặc biệt cho TOP 1 */
+        .level-card.top-1 {
+            border-color: var(--rank-1);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
         }
 
-        .placeholder-text { font-size: 1.2rem; font-style: italic; opacity: 0.8; line-height: 1.6; }
-        .highlight { color: var(--primary); font-weight: 800; font-style: normal; }
+        .level-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .level-info { display: flex; align-items: center; gap: 25px; }
+
+        .rank {
+            font-size: 2.5rem; font-weight: 900; color: var(--rank-1); min-width: 50px;
+        }
+
+        .details { text-align: left; }
+        .level-name { font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--primary); }
+        .creator { font-size: 1rem; opacity: 0.7; margin: 5px 0; }
+        .level-meta { font-size: 0.85rem; font-family: monospace; opacity: 0.6; }
+
+        .no-video {
+            font-size: 0.8rem; background: #444; color: #fff;
+            padding: 5px 12px; border-radius: 10px; opacity: 0.5;
+        }
 
         footer {
-            text-align: center;
-            padding: 25px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            border-top: 1px solid var(--border);
-            background: var(--card-bg);
+            text-align: center; padding: 25px; font-size: 0.9rem; opacity: 0.7;
+            border-top: 1px solid var(--border); background: var(--card-bg);
         }
 
         #theme-btn {
-            background: none;
-            border: 1px solid var(--border);
-            padding: 8px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text);
-            width: 35px; height: 35px;
-            display: flex; align-items: center; justify-content: center;
+            background: none; border: 1px solid var(--border); padding: 8px;
+            border-radius: 50%; cursor: pointer; color: var(--text);
+            width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .level-card { flex-direction: column; text-align: center; gap: 15px; }
+            .details { text-align: center; }
         }
     </style>
 </head>
@@ -157,7 +148,7 @@
         <nav>
             <div class="search-box">
                 <span>🔍</span>
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search levels...">
             </div>
             <a href="#" style="text-decoration: none; color: var(--text); font-weight: 600;">Home</a>
             <a href="#" style="text-decoration: none; color: var(--text); font-weight: 600;">News</a>
@@ -168,16 +159,22 @@
     <main>
         <h1>SYNC LIST</h1>
 
-        <div class="main-card">
-            <p class="placeholder-text">
-                Waiting for the beat to drop... <br>
-                I will add the level here until you send me a <br>
-                <span class="highlight">"SONG CLICK SYNC"</span> level.
-            </p>
-            
-            <div style="margin-top: 30px; font-size: 0.9rem;">
-                <strong>Submission:</strong> Send ID & Video to <br>
-                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary); text-decoration: none; font-weight: bold;">nguoivinhloc@gmail.com</a>
+        <div class="level-list">
+            <div class="level-card top-1">
+                <div class="level-info">
+                    <div class="rank">#1</div>
+                    <div class="details">
+                        <p class="level-name">Montagem Rebola Layout</p>
+                        <p class="creator">by <strong>plusgdinues</strong></p>
+                        <p class="level-meta">ID: [WAITING...] • SONG CLICK SYNC</p>
+                    </div>
+                </div>
+                <div class="no-video">NO VIDEO AVAILABLE</div>
+            </div>
+
+            <div style="margin-top: 30px; opacity: 0.6; font-style: italic; font-size: 0.9rem; text-align: center;">
+                Waiting for more submissions... <br>
+                Send ID & Video to <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary);">nguoivinhloc@gmail.com</a>
             </div>
         </div>
     </main>
@@ -192,10 +189,10 @@
         btn.onclick = () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
-                btn.innerText = '🌙';
+                btn.innerText = '☀️';
             } else {
                 body.setAttribute('data-theme', 'dark');
-                btn.innerText = '☀️';
+                btn.innerText = '🌙';
             }
         };
     </script>
