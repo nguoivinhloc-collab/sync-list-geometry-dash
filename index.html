@@ -14,7 +14,7 @@
             --border: #eeeeee;
             --rank-1: #ffcc00;
             --title-top: #000000; 
-            --copyright-color: #888888; /* Chữ xám cho Copyright */
+            --copyright-color: #888888;
         }
 
         [data-theme="dark"] {
@@ -40,14 +40,14 @@
             position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; cursor: pointer; }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; cursor: pointer; letter-spacing: 1px; }
         
         .search-trigger {
             background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 20px; padding: 8px 20px; cursor: pointer;
+            border-radius: 20px; padding: 8px 20px; cursor: pointer; font-size: 0.9rem;
         }
 
-        /* MODAL SEARCH */
+        /* FULLSCREEN SEARCH MODAL */
         #searchModal {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9);
@@ -60,7 +60,7 @@
             color: white; font-size: 2.5rem; outline: none; padding: 10px;
         }
 
-        /* MAIN TITLE & TIP */
+        /* TITLE & TIP */
         h1.main-title {
             font-size: 6.5rem; margin: 40px 0 0 0; font-weight: 900;
             text-transform: uppercase; text-align: center; line-height: 1;
@@ -70,7 +70,7 @@
         }
         .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; text-align: center; }
 
-        /* LIST & CARDS */
+        /* LISTS */
         .level-list { width: 90%; max-width: 850px; margin: 0 auto 50px auto; }
         .level-card {
             background: var(--card-bg); border: 1px solid var(--border);
@@ -82,13 +82,13 @@
         .rank-number { font-size: 2rem; font-weight: 900; min-width: 60px; color: var(--primary-cyan); }
         .rank-1 { color: var(--rank-1) !important; font-size: 2.5rem; }
 
-        /* SUBMIT NOTE */
+        /* SUBMISSION INFO */
         .submit-info {
             background: rgba(0, 206, 209, 0.05); border: 2px dashed var(--primary-cyan);
             border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 40px;
         }
 
-        /* NEWS PAGE IMPROVED */
+        /* NEWS ARTICLES */
         .news-article {
             background: var(--card-bg); border: 1px solid var(--border);
             border-radius: 20px; padding: 30px; margin-bottom: 20px; text-align: left;
@@ -101,11 +101,11 @@
         .page-section { display: none; padding: 20px; }
         .page-section.active { display: block; }
 
-        /* FOOTER */
         footer { 
             text-align: center; padding: 30px; 
-            color: var(--copyright-color); /* Màu xám */
+            color: var(--copyright-color);
             font-size: 0.85rem; border-top: 1px solid var(--border);
+            margin-top: auto;
         }
         
         .btn-cyan {
@@ -138,11 +138,11 @@
 
     <main id="home-section" class="page-section active">
         <h1 class="main-title">SYNC LIST</h1>
-        <p class="tip-text">Tip: Change to dark mode for best experiment.</p>
+        <p class="tip-text">Tip: Change to dark mode for best experience.</p>
 
         <div class="level-list">
             <div class="submit-info">
-                <strong>WANT TO ADD A LEVEL?</strong><br>
+                <strong>WANT TO SUBMIT A LEVEL?</strong><br>
                 Send ID & Video link to: <a href="mailto:nguoivinhloc@gmail.com" style="color:var(--primary-cyan); font-weight:bold;">nguoivinhloc@gmail.com</a>
             </div>
 
@@ -157,6 +157,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <script>
                     for(let i=2; i<=10; i++) {
                         document.write(`
@@ -182,15 +183,15 @@
             
             <div class="news-article">
                 <span class="news-tag">UPDATE</span>
-                <h2 style="margin: 15px 0 10px 0;">The First Level Added!</h2>
-                <p>Chúng tôi đã chính thức thêm level đầu tiên vào danh sách: <strong>Montagem Rebola Layout</strong> bởi <strong>plusgdinues</strong>. Chúc mừng vị trí Top 1 đầu tiên!</p>
+                <h2 style="margin: 15px 0 10px 0;">The First Level is Live!</h2>
+                <p>We have officially added the first level to the list: <strong>Montagem Rebola Layout</strong> by <strong>plusgdinues</strong>. Congratulations on securing the first Top 1 spot!</p>
                 <p style="font-size: 0.8rem; opacity: 0.5;">Feb 14, 2026</p>
             </div>
 
             <div class="news-article">
                 <span class="news-tag">FUN FACT</span>
-                <h2 style="margin: 15px 0 10px 0;">Did you know?</h2>
-                <p>Chủ nhân của vị trí Top 1 hiện tại cũng chính là người tạo ra danh sách này. Một khởi đầu khá thú vị đúng không? 🤣</p>
+                <h2 style="margin: 15px 0 10px 0;">Developer Insight</h2>
+                <p>The creator of the current Top 1 level is also the one who built this list. Talk about a "host advantage"! 🤣</p>
                 <p style="font-size: 0.8rem; opacity: 0.5;">Feb 13, 2026</p>
             </div>
 
@@ -200,7 +201,7 @@
         </div>
     </main>
 
-    <footer>Copyright © 2026 HUNG [GD] - All right reversed</footer>
+    <footer>Copyright © 2026 HUNG [GD] - All rights reserved</footer>
 
     <script>
         function openSearch() { document.getElementById('searchModal').style.display = 'flex'; document.getElementById('largeSearchInput').focus(); }
