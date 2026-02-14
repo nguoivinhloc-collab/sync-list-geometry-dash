@@ -6,13 +6,15 @@
     <title>Sync List - Geometry Dash</title>
     <style>
         :root {
-            --primary: #00b395;
+            --primary: #00ffff; /* Cyan */
             --bg: #ffffff;
             --text: #1a1a1a;
             --card-bg: #f9f9f9;
             --header-bg: rgba(255, 255, 255, 0.95);
             --border: #eeeeee;
             --rank-1: #ffcc00;
+            /* Màu nửa trên của chữ SYNC LIST khi ở chế độ sáng */
+            --title-top: #000000; 
         }
 
         [data-theme="dark"] {
@@ -21,7 +23,9 @@
             --card-bg: #161616;
             --header-bg: rgba(13, 13, 13, 0.95);
             --border: #222222;
-            --primary: #00ffd4;
+            --primary: #00ffff;
+            /* Màu nửa trên của chữ chuyển sang trắng ở chế độ tối để dễ nhìn */
+            --title-top: #ffffff; 
         }
 
         body {
@@ -48,8 +52,7 @@
 
         .logo {
             font-size: 1.4rem; font-weight: 900;
-            background: linear-gradient(90deg, var(--primary), #00a3ff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            color: var(--primary);
             text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
         }
 
@@ -74,14 +77,30 @@
             font-weight: 600; cursor: pointer; transition: 0.2s;
         }
 
-        .nav-link:hover { color: var(--primary); }
-
         .page-section { display: none; padding: 40px 20px; flex: 1; animation: fadeIn 0.4s ease; }
         .page-section.active { display: flex; flex-direction: column; align-items: center; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        h1 { font-size: 3.5rem; margin-bottom: 30px; font-weight: 900; text-transform: uppercase; text-align: center; }
+        /* HIỆU ỨNG CHỮ SYNC LIST 2 MÀU */
+        h1.main-title {
+            font-size: 6rem; /* Làm chữ to ra */
+            margin-bottom: 30px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1;
+            /* Tạo dải màu cắt ngang 50% */
+            background: linear-gradient(to bottom, 
+                var(--title-top) 0%, 
+                var(--title-top) 50%, 
+                var(--primary) 50%, 
+                var(--primary) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.2));
+        }
 
         .level-list { width: 100%; max-width: 800px; }
         .level-card {
@@ -94,29 +113,23 @@
             max-width: 600px; width: 100%;
             background: var(--card-bg); border-radius: 25px;
             padding: 40px; border: 1px solid var(--border);
-            position: relative;
         }
 
         .fun-fact {
-            background: rgba(0, 179, 149, 0.1);
+            background: rgba(0, 255, 255, 0.1);
             padding: 25px; border-radius: 15px;
             border-left: 6px solid var(--primary);
             font-size: 1.2rem; line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .news-date {
-            font-size: 0.85rem;
-            opacity: 0.6;
-            text-align: right;
-            font-family: monospace;
-            margin-bottom: 25px;
-        }
+        .news-date { font-size: 0.85rem; opacity: 0.6; text-align: right; font-family: monospace; margin-bottom: 25px; }
 
         footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
 
         @media (max-width: 768px) {
+            h1.main-title { font-size: 3.5rem; }
             header { padding: 15px 20px; flex-direction: column; gap: 15px; }
         }
     </style>
@@ -137,7 +150,7 @@
     </header>
 
     <main id="home-section" class="page-section active">
-        <h1>SYNC LIST</h1>
+        <h1 class="main-title">SYNC LIST</h1>
         <div class="level-list">
             <div class="level-card">
                 <div style="display: flex; align-items: center; gap: 25px;">
@@ -163,9 +176,8 @@
             <div class="news-date">
                 Posted on: 13/02/2026, 17:23 PM
             </div>
-            
-            <div style="border-top: 1px solid var(--border); padding-top: 20px; text-align: center;">
-                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;">Back to Home</button>
+            <div style="text-align: center;">
+                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer;">Back to Home</button>
             </div>
         </div>
     </main>
