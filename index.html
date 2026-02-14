@@ -85,7 +85,6 @@
                     drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
         }
 
-        /* DÒNG TIP NHỎ */
         .tip-text {
             font-size: 0.9rem;
             margin: 10px 0 40px 0;
@@ -98,9 +97,19 @@
             background: var(--card-bg); border: 2px solid var(--rank-1);
             border-radius: 20px; padding: 25px; display: flex;
             align-items: center; justify-content: space-between;
+            transition: transform 0.2s;
+        }
+        .level-card:hover { transform: scale(1.01); }
+
+        .id-badge {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0, 206, 209, 0.1);
+            color: var(--primary-cyan);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
         }
 
-        /* DÒNG HƯỚNG DẪN GỬI EMAIL */
         .submit-note {
             margin-top: 40px;
             padding: 20px;
@@ -110,8 +119,6 @@
             text-align: center;
             opacity: 0.8;
         }
-
-        .submit-note strong { color: var(--primary-cyan); }
 
         .btn-cyan {
             background: var(--primary-cyan); border: none;
@@ -159,7 +166,7 @@
                     <div style="text-align: left;">
                         <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text);">Montagem Rebola Layout</p>
                         <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
-                        <p style="font-size: 0.85rem; opacity: 0.6; font-family: monospace;">ID: [WAITING...] • SONG CLICK SYNC</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">ID: <span class="id-badge">133284474</span> • SONG CLICK SYNC</p>
                     </div>
                 </div>
                 <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
