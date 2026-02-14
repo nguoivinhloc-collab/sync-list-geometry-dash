@@ -55,6 +55,7 @@
             background: var(--card-bg); border: 1px solid var(--border);
             border-radius: 20px; padding: 5px 15px;
         }
+        /* Ô INPUT SEARCH */
         .search-container input { border: none; background: transparent; color: var(--text); outline: none; width: 140px; }
 
         .nav-link { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; }
@@ -85,50 +86,34 @@
                     drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
         }
 
-        .tip-text {
-            font-size: 0.9rem;
-            margin: 10px 0 40px 0;
-            opacity: 0.6;
-            font-style: italic;
-        }
+        .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; }
 
-        .level-list { width: 100%; max-width: 800px; }
+        .level-list { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 15px; }
+        
+        /* Chỉnh sửa Card để hỗ trợ ẩn/hiện khi search */
         .level-card {
             background: var(--card-bg); border: 2px solid var(--rank-1);
             border-radius: 20px; padding: 25px; display: flex;
             align-items: center; justify-content: space-between;
-            transition: transform 0.2s;
+            transition: 0.3s;
         }
-        .level-card:hover { transform: scale(1.01); }
+        .level-card.hidden { display: none; } /* Class để ẩn level không khớp */
 
         .id-badge {
             font-family: 'Courier New', Courier, monospace;
-            background: rgba(0, 206, 209, 0.1);
-            color: var(--primary-cyan);
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-weight: bold;
+            background: rgba(0, 206, 209, 0.1); color: var(--primary-cyan);
+            padding: 2px 8px; border-radius: 5px; font-weight: bold;
         }
 
         .submit-note {
-            margin-top: 40px;
-            padding: 20px;
-            border: 1px dashed var(--border);
-            border-radius: 15px;
-            font-size: 0.95rem;
-            text-align: center;
-            opacity: 0.8;
+            margin-top: 40px; padding: 20px; border: 1px dashed var(--border);
+            border-radius: 15px; font-size: 0.95rem; text-align: center; opacity: 0.8;
         }
 
         .btn-cyan {
-            background: var(--primary-cyan); border: none;
-            padding: 12px 30px; border-radius: 12px;
-            color: #000; font-weight: 800; text-transform: uppercase;
-            cursor: pointer; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 206, 209, 0.3);
+            background: var(--primary-cyan); border: none; padding: 12px 30px; border-radius: 12px;
+            color: #000; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
-
-        .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 206, 209, 0.5); }
 
         .news-container { max-width: 600px; width: 100%; background: var(--card-bg); border-radius: 25px; padding: 40px; border: 1px solid var(--border); }
         .fun-fact { background: rgba(0, 206, 209, 0.05); padding: 25px; border-radius: 15px; border-left: 6px solid var(--primary-cyan); font-size: 1.2rem; margin-bottom: 10px; }
@@ -146,7 +131,7 @@
         <div class="logo" onclick="showSection('home')">Sync List</div>
         <nav>
             <div class="search-container">
-                <input type="text" placeholder="Search levels...">
+                <input type="text" id="searchInput" onkeyup="searchLevel()" placeholder="Search levels...">
                 <span>🔍</span>
             </div>
             <a class="nav-link" onclick="showSection('home')">Home</a>
@@ -159,20 +144,20 @@
         <h1 class="main-title">SYNC LIST</h1>
         <p class="tip-text">Tip: Change to dark mode for best experiment.</p>
 
-        <div class="level-list">
+        <div class="level-list" id="levelContainer">
             <div class="level-card">
                 <div style="display: flex; align-items: center; gap: 25px;">
                     <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
                     <div style="text-align: left;">
-                        <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text);">Montagem Rebola Layout</p>
-                        <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
+                        <p class="level-title" style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text);">Montagem Rebola Layout</p>
+                        <p style="opacity: 0.7; margin: 5px 0;">by <strong class="level-creator">plusgdinues</strong></p>
                         <p style="font-size: 0.85rem; opacity: 0.8;">ID: <span class="id-badge">133284474</span> • SONG CLICK SYNC</p>
                     </div>
                 </div>
                 <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
             </div>
 
-            <div class="submit-note">
+            <div class="submit-note" id="submitNote">
                 Want to submit a level? Send <strong>ID & Video</strong> to: <br>
                 <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary-cyan); text-decoration: none; font-weight: bold;">nguoivinhloc@gmail.com</a>
             </div>
@@ -196,6 +181,28 @@
     <footer>Copyright © 2026 HUNG [GD] - All right reversed</footer>
 
     <script>
+        // HÀM TÌM KIẾM LEVEL
+        function searchLevel() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('level-card');
+            let note = document.getElementById('submitNote');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector('.level-title').innerText.toLowerCase();
+                let creator = cards[i].querySelector('.level-creator').innerText.toLowerCase();
+                
+                if (title.includes(input) || creator.includes(input)) {
+                    cards[i].classList.remove('hidden');
+                } else {
+                    cards[i].classList.add('hidden');
+                }
+            }
+            
+            // Ẩn dòng Note nếu đang tìm kiếm để giao diện gọn hơn
+            if (input !== "") { note.style.display = "none"; } 
+            else { note.style.display = "block"; }
+        }
+
         function showSection(sectionId) {
             document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId + '-section').classList.add('active');
