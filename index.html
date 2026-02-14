@@ -8,7 +8,7 @@
         :root {
             --primary-cyan: #00ced1;
             --bg: #ffffff;
-            --text: #000000; /* Chữ toàn trang màu đen */
+            --text: #000000;
             --card-bg: #f9f9f9;
             --header-bg: rgba(255, 255, 255, 0.95);
             --border: #eeeeee;
@@ -64,7 +64,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* HIỆU ỨNG CHỮ SYNC LIST: TRỘN MÀU + GLOW CYAN QUANH CHỮ */
+        /* TIÊU ĐỀ SYNC LIST */
         h1.main-title {
             font-size: 6.5rem;
             margin-bottom: 30px;
@@ -72,7 +72,6 @@
             text-transform: uppercase;
             text-align: center;
             line-height: 1;
-            /* Trộn màu bên trong chữ */
             background: linear-gradient(to bottom, 
                 var(--title-top) 0%, 
                 var(--title-top) 40%, 
@@ -82,7 +81,6 @@
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* QUẦNG SÁNG (GLOW) CYAN QUANH CHỮ */
             filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6))
                     drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
         }
@@ -94,8 +92,6 @@
             align-items: center; justify-content: space-between;
         }
 
-        .level-name { font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text); }
-
         .news-container {
             max-width: 600px; width: 100%;
             background: var(--card-bg); border-radius: 25px;
@@ -103,9 +99,29 @@
         }
 
         .fun-fact {
-            background: rgba(0, 0, 0, 0.05);
-            padding: 25px; border-radius: 15px; border-left: 6px solid var(--text);
+            background: rgba(0, 206, 209, 0.05);
+            padding: 25px; border-radius: 15px; border-left: 6px solid var(--primary-cyan);
             font-size: 1.2rem; margin-bottom: 10px;
+        }
+
+        /* NÚT BACK TO HOME MÀU CYAN ĐẬM */
+        .btn-cyan {
+            background: var(--primary-cyan);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            color: #000; /* Chữ đen cho dễ đọc trên nền cyan */
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 206, 209, 0.3);
+        }
+
+        .btn-cyan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 206, 209, 0.5);
+            filter: brightness(1.1);
         }
 
         .news-date { font-size: 0.85rem; opacity: 0.6; text-align: right; font-family: monospace; margin-bottom: 25px; }
@@ -138,7 +154,7 @@
                 <div style="display: flex; align-items: center; gap: 25px;">
                     <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
                     <div style="text-align: left;">
-                        <p class="level-name">Montagem Rebola Layout</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text);">Montagem Rebola Layout</p>
                         <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
                         <p style="font-size: 0.85rem; opacity: 0.6; font-family: monospace;">ID: [WAITING...] • SONG CLICK SYNC</p>
                     </div>
@@ -149,7 +165,7 @@
     </main>
 
     <main id="news-section" class="page-section">
-        <h1>LATEST NEWS</h1>
+        <h1 style="color: var(--text);">LATEST NEWS</h1>
         <div class="news-container">
             <div class="fun-fact">
                 💡 <strong>Fun fact:</strong> <br>
@@ -157,7 +173,7 @@
             </div>
             <div class="news-date">Posted on: 13/02/2026, 17:23 PM</div>
             <div style="text-align: center;">
-                <button onclick="showSection('home')" style="background: var(--text); border: none; padding: 10px 25px; border-radius: 12px; color: var(--bg); font-weight: bold; cursor: pointer;">Back to Home</button>
+                <button onclick="showSection('home')" class="btn-cyan">Back to Home</button>
             </div>
         </div>
     </main>
@@ -177,7 +193,7 @@
                 document.body.removeAttribute('data-theme');
                 themeBtn.innerText = '🌙';
             } else {
-                body = document.body.setAttribute('data-theme', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
                 themeBtn.innerText = '☀️';
             }
         };
