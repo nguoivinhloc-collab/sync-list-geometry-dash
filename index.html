@@ -14,6 +14,7 @@
             --border: #eeeeee;
             --rank-1: #ffcc00;
             --title-top: #000000; 
+            --copyright-color: #888888; /* Chữ xám cho Copyright */
         }
 
         [data-theme="dark"] {
@@ -32,7 +33,6 @@
             display: flex; flex-direction: column;
         }
 
-        /* HEADER */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 40px; background: var(--header-bg);
@@ -42,79 +42,77 @@
 
         .logo { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; cursor: pointer; }
         
-        /* SEARCH BAR TRÊN HEADER */
         .search-trigger {
             background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 20px; padding: 8px 20px; color: var(--text);
-            cursor: pointer; opacity: 0.8; transition: 0.3s;
+            border-radius: 20px; padding: 8px 20px; cursor: pointer;
         }
-        .search-trigger:hover { opacity: 1; border-color: var(--primary-cyan); }
 
-        /* MODAL CỬA SỔ TÌM KIẾM LỚN */
+        /* MODAL SEARCH */
         #searchModal {
             display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px); z-index: 2000;
             flex-direction: column; align-items: center; padding-top: 100px;
         }
-
-        .search-box-large {
-            width: 90%; max-width: 800px;
-            background: transparent; border-bottom: 4px solid var(--primary-cyan);
-            display: flex; align-items: center; padding: 10px;
-        }
-
+        .search-box-large { width: 90%; max-width: 800px; border-bottom: 4px solid var(--primary-cyan); }
         .search-box-large input {
             width: 100%; background: transparent; border: none;
-            color: white; font-size: 2.5rem; font-weight: 700;
-            outline: none; padding: 10px;
+            color: white; font-size: 2.5rem; outline: none; padding: 10px;
         }
 
-        .close-search {
-            position: absolute; top: 40px; right: 40px;
-            color: white; font-size: 2rem; cursor: pointer; font-weight: bold;
-        }
-
-        #searchResults {
-            margin-top: 40px; width: 90%; max-width: 800px;
-            max-height: 60vh; overflow-y: auto;
-        }
-
-        /* TIÊU ĐỀ SYNC LIST */
+        /* MAIN TITLE & TIP */
         h1.main-title {
-            font-size: 6.5rem; margin: 0; font-weight: 900;
+            font-size: 6.5rem; margin: 40px 0 0 0; font-weight: 900;
             text-transform: uppercase; text-align: center; line-height: 1;
             background: linear-gradient(to bottom, var(--title-top) 40%, var(--primary-cyan) 60%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6));
         }
-
         .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; text-align: center; }
 
-        /* LEVEL CARD TRONG DANH SÁCH */
-        .level-list { width: 100%; max-width: 800px; margin: 0 auto; }
+        /* LIST & CARDS */
+        .level-list { width: 90%; max-width: 850px; margin: 0 auto 50px auto; }
         .level-card {
-            background: var(--card-bg); border: 2px solid var(--rank-1);
-            border-radius: 20px; padding: 25px; display: flex;
-            align-items: center; justify-content: space-between; margin-bottom: 15px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 15px; padding: 20px; display: flex;
+            align-items: center; justify-content: space-between; margin-bottom: 12px;
+            transition: 0.2s;
+        }
+        .level-card:hover { border-color: var(--primary-cyan); transform: translateX(5px); }
+        .rank-number { font-size: 2rem; font-weight: 900; min-width: 60px; color: var(--primary-cyan); }
+        .rank-1 { color: var(--rank-1) !important; font-size: 2.5rem; }
+
+        /* SUBMIT NOTE */
+        .submit-info {
+            background: rgba(0, 206, 209, 0.05); border: 2px dashed var(--primary-cyan);
+            border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 40px;
         }
 
-        .id-badge {
-            font-family: monospace; background: rgba(0, 206, 209, 0.1);
-            color: var(--primary-cyan); padding: 2px 8px; border-radius: 5px;
+        /* NEWS PAGE IMPROVED */
+        .news-article {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 20px; padding: 30px; margin-bottom: 20px; text-align: left;
+        }
+        .news-tag { 
+            background: var(--primary-cyan); color: #000; 
+            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
         }
 
-        .btn-cyan {
-            background: var(--primary-cyan); border: none; padding: 12px 30px;
-            border-radius: 12px; font-weight: 800; cursor: pointer;
-        }
-
-        .page-section { display: none; padding: 40px 20px; animation: fadeIn 0.4s; }
+        .page-section { display: none; padding: 20px; }
         .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); margin-top: auto; }
+        /* FOOTER */
+        footer { 
+            text-align: center; padding: 30px; 
+            color: var(--copyright-color); /* Màu xám */
+            font-size: 0.85rem; border-top: 1px solid var(--border);
+        }
+        
+        .btn-cyan {
+            background: var(--primary-cyan); border: none; padding: 12px 25px;
+            border-radius: 10px; font-weight: bold; cursor: pointer; color: #000;
+        }
+
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
     </style>
 </head>
@@ -123,7 +121,7 @@
     <header>
         <div class="logo" onclick="showSection('home')">Sync List</div>
         <nav style="display: flex; gap: 20px; align-items: center;">
-            <div class="search-trigger" onclick="openSearch()">Search Levels... 🔍</div>
+            <div class="search-trigger" onclick="openSearch()">Search... 🔍</div>
             <a onclick="showSection('home')" style="cursor:pointer; font-weight:600;">Home</a>
             <a onclick="showSection('news')" style="cursor:pointer; font-weight:600;">News</a>
             <button id="theme-btn">🌙</button>
@@ -131,38 +129,72 @@
     </header>
 
     <div id="searchModal">
-        <span class="close-search" onclick="closeSearch()">✕</span>
+        <span onclick="closeSearch()" style="position:absolute; top:40px; right:40px; color:white; font-size:2rem; cursor:pointer;">✕</span>
         <div class="search-box-large">
-            <input type="text" id="largeSearchInput" onkeyup="liveSearch()" placeholder="Type level or creator name..." autofocus>
+            <input type="text" id="largeSearchInput" onkeyup="liveSearch()" placeholder="Search level or creator..." autofocus>
         </div>
-        <div id="searchResults">
-            </div>
+        <div id="searchResults" class="level-list" style="margin-top:40px; overflow-y:auto; max-height:60vh;"></div>
     </div>
 
     <main id="home-section" class="page-section active">
         <h1 class="main-title">SYNC LIST</h1>
         <p class="tip-text">Tip: Change to dark mode for best experiment.</p>
 
-        <div class="level-list" id="mainLevelList">
-            <div class="level-card">
-                <div style="display: flex; align-items: center; gap: 25px;">
-                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
-                    <div style="text-align: left;">
-                        <p class="l-title" style="font-size: 1.6rem; font-weight: 800; margin: 0;">Montagem Rebola Layout</p>
-                        <p style="opacity: 0.7; margin: 5px 0;">by <strong class="l-creator">plusgdinues</strong></p>
-                        <p style="font-size: 0.85rem;">ID: <span class="id-badge">133284474</span></p>
+        <div class="level-list">
+            <div class="submit-info">
+                <strong>WANT TO ADD A LEVEL?</strong><br>
+                Send ID & Video link to: <a href="mailto:nguoivinhloc@gmail.com" style="color:var(--primary-cyan); font-weight:bold;">nguoivinhloc@gmail.com</a>
+            </div>
+
+            <div id="mainLevelList">
+                <div class="level-card">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div class="rank-number rank-1">#1</div>
+                        <div>
+                            <p class="l-title" style="font-size: 1.4rem; font-weight: 800; margin: 0;">Montagem Rebola Layout</p>
+                            <p style="opacity: 0.7; margin: 5px 0;">by <strong class="l-creator">plusgdinues</strong></p>
+                            <p style="font-size: 0.8rem; opacity: 0.6;">ID: 133284474</p>
+                        </div>
                     </div>
                 </div>
+                <script>
+                    for(let i=2; i<=10; i++) {
+                        document.write(`
+                        <div class="level-card" style="opacity: 0.5;">
+                            <div style="display: flex; align-items: center; gap: 20px;">
+                                <div class="rank-number">#${i}</div>
+                                <div>
+                                    <p class="l-title" style="font-size: 1.2rem; font-weight: 700; margin: 0;">Empty Slot</p>
+                                    <p style="opacity: 0.7; margin: 5px 0;">by <strong>Unknown</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        `);
+                    }
+                </script>
             </div>
         </div>
     </main>
 
     <main id="news-section" class="page-section">
-        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <h1>LATEST NEWS</h1>
-            <div style="background: var(--card-bg); padding: 40px; border-radius: 25px; border: 1px solid var(--border);">
-                <p>💡 <strong>Fun fact:</strong> The first top 1 level is my level (LOL) 🤣</p>
-                <p style="font-size: 0.8rem; opacity: 0.5;">Posted on: 13/02/2026, 17:23 PM</p>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h1 style="text-align: center; margin-bottom: 40px;">LATEST UPDATES</h1>
+            
+            <div class="news-article">
+                <span class="news-tag">UPDATE</span>
+                <h2 style="margin: 15px 0 10px 0;">The First Level Added!</h2>
+                <p>Chúng tôi đã chính thức thêm level đầu tiên vào danh sách: <strong>Montagem Rebola Layout</strong> bởi <strong>plusgdinues</strong>. Chúc mừng vị trí Top 1 đầu tiên!</p>
+                <p style="font-size: 0.8rem; opacity: 0.5;">Feb 14, 2026</p>
+            </div>
+
+            <div class="news-article">
+                <span class="news-tag">FUN FACT</span>
+                <h2 style="margin: 15px 0 10px 0;">Did you know?</h2>
+                <p>Chủ nhân của vị trí Top 1 hiện tại cũng chính là người tạo ra danh sách này. Một khởi đầu khá thú vị đúng không? 🤣</p>
+                <p style="font-size: 0.8rem; opacity: 0.5;">Feb 13, 2026</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
                 <button onclick="showSection('home')" class="btn-cyan">Back to Home</button>
             </div>
         </div>
@@ -171,36 +203,21 @@
     <footer>Copyright © 2026 HUNG [GD] - All right reversed</footer>
 
     <script>
-        // Mở cửa sổ tìm kiếm
-        function openSearch() {
-            document.getElementById('searchModal').style.display = 'flex';
-            document.getElementById('largeSearchInput').focus();
-        }
-
-        // Đóng cửa sổ tìm kiếm
-        function closeSearch() {
-            document.getElementById('searchModal').style.display = 'none';
-            document.getElementById('largeSearchInput').value = '';
-            document.getElementById('searchResults').innerHTML = '';
-        }
-
-        // Tìm kiếm và hiển thị kết quả ngay trong cửa sổ lớn
+        function openSearch() { document.getElementById('searchModal').style.display = 'flex'; document.getElementById('largeSearchInput').focus(); }
+        function closeSearch() { document.getElementById('searchModal').style.display = 'none'; }
+        
         function liveSearch() {
             let query = document.getElementById('largeSearchInput').value.toLowerCase();
             let resultsContainer = document.getElementById('searchResults');
             let allLevels = document.querySelectorAll('#mainLevelList .level-card');
-            
-            resultsContainer.innerHTML = ''; // Xóa kết quả cũ
-
+            resultsContainer.innerHTML = '';
             if (query === "") return;
-
             allLevels.forEach(card => {
                 let title = card.querySelector('.l-title').innerText.toLowerCase();
                 let creator = card.querySelector('.l-creator').innerText.toLowerCase();
-
                 if (title.includes(query) || creator.includes(query)) {
-                    let clone = card.cloneNode(true); // Tạo bản sao của level card
-                    clone.style.borderColor = "var(--primary-cyan)";
+                    let clone = card.cloneNode(true);
+                    clone.style.opacity = "1";
                     resultsContainer.appendChild(clone);
                 }
             });
@@ -209,6 +226,7 @@
         function showSection(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id + '-section').classList.add('active');
+            window.scrollTo(0,0);
         }
 
         const themeBtn = document.getElementById('theme-btn');
