@@ -13,8 +13,10 @@
             --header-bg: rgba(255, 255, 255, 0.95);
             --border: #eeeeee;
             --rank-1: #ffcc00;
-            /* Màu nửa trên của chữ SYNC LIST khi ở chế độ sáng */
             --title-top: #000000; 
+            /* Glow cho chế độ sáng */
+            --glow-top: rgba(0, 0, 0, 0.2);
+            --glow-bottom: rgba(0, 255, 255, 0.6);
         }
 
         [data-theme="dark"] {
@@ -23,9 +25,10 @@
             --card-bg: #161616;
             --header-bg: rgba(13, 13, 13, 0.95);
             --border: #222222;
-            --primary: #00ffff;
-            /* Màu nửa trên của chữ chuyển sang trắng ở chế độ tối để dễ nhìn */
             --title-top: #ffffff; 
+            /* Glow rực rỡ hơn trong chế độ tối */
+            --glow-top: rgba(255, 255, 255, 0.3);
+            --glow-bottom: rgba(0, 255, 255, 0.8);
         }
 
         body {
@@ -82,24 +85,23 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* HIỆU ỨNG CHỮ SYNC LIST 2 MÀU */
+        /* HIỆU ỨNG CHỮ SYNC LIST 2 MÀU + GLOW */
         h1.main-title {
-            font-size: 6rem; /* Làm chữ to ra */
+            font-size: 6rem;
             margin-bottom: 30px;
             font-weight: 900;
             text-transform: uppercase;
             text-align: center;
             line-height: 1;
-            /* Tạo dải màu cắt ngang 50% */
             background: linear-gradient(to bottom, 
-                var(--title-top) 0%, 
                 var(--title-top) 50%, 
-                var(--primary) 50%, 
-                var(--primary) 100%
+                var(--primary) 50%
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.2));
+            /* Glow đa tầng cho cả 2 màu */
+            filter: drop-shadow(0 2px 2px var(--glow-top)) 
+                    drop-shadow(0 0 10px var(--glow-bottom));
         }
 
         .level-list { width: 100%; max-width: 800px; }
@@ -129,7 +131,7 @@
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
 
         @media (max-width: 768px) {
-            h1.main-title { font-size: 3.5rem; }
+            h1.main-title { font-size: 3rem; }
             header { padding: 15px 20px; flex-direction: column; gap: 15px; }
         }
     </style>
@@ -156,7 +158,7 @@
                 <div style="display: flex; align-items: center; gap: 25px;">
                     <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
                     <div style="text-align: left;">
-                        <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--primary);">Montagem Rebola Layout</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--primary); filter: drop-shadow(0 0 5px rgba(0,255,255,0.3));">Montagem Rebola Layout</p>
                         <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
                         <p style="font-size: 0.85rem; opacity: 0.6;">ID: [WAITING...] • SONG CLICK SYNC</p>
                     </div>
@@ -177,7 +179,7 @@
                 Posted on: 13/02/2026, 17:23 PM
             </div>
             <div style="text-align: center;">
-                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer;">Back to Home</button>
+                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px var(--primary);">Back to Home</button>
             </div>
         </div>
     </main>
