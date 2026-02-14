@@ -26,153 +26,143 @@
         }
 
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            transition: 0.3s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin: 0; font-family: 'Inter', sans-serif;
+            background-color: var(--bg); color: var(--text);
+            transition: 0.3s; min-height: 100vh;
+            display: flex; flex-direction: column;
         }
 
+        /* HEADER */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: var(--header-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 40px; background: var(--header-bg);
+            backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 1000;
         }
 
         .logo { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; cursor: pointer; }
-        nav { display: flex; gap: 20px; align-items: center; }
-
-        .search-container {
-            display: flex; align-items: center;
+        
+        /* SEARCH BAR TRÊN HEADER */
+        .search-trigger {
             background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 20px; padding: 5px 15px;
+            border-radius: 20px; padding: 8px 20px; color: var(--text);
+            cursor: pointer; opacity: 0.8; transition: 0.3s;
         }
-        /* Ô INPUT SEARCH */
-        .search-container input { border: none; background: transparent; color: var(--text); outline: none; width: 140px; }
+        .search-trigger:hover { opacity: 1; border-color: var(--primary-cyan); }
 
-        .nav-link { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; }
+        /* MODAL CỬA SỔ TÌM KIẾM LỚN */
+        #searchModal {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px); z-index: 2000;
+            flex-direction: column; align-items: center; padding-top: 100px;
+        }
 
-        .page-section { display: none; padding: 40px 20px; flex: 1; animation: fadeIn 0.4s ease; }
-        .page-section.active { display: flex; flex-direction: column; align-items: center; }
+        .search-box-large {
+            width: 90%; max-width: 800px;
+            background: transparent; border-bottom: 4px solid var(--primary-cyan);
+            display: flex; align-items: center; padding: 10px;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .search-box-large input {
+            width: 100%; background: transparent; border: none;
+            color: white; font-size: 2.5rem; font-weight: 700;
+            outline: none; padding: 10px;
+        }
+
+        .close-search {
+            position: absolute; top: 40px; right: 40px;
+            color: white; font-size: 2rem; cursor: pointer; font-weight: bold;
+        }
+
+        #searchResults {
+            margin-top: 40px; width: 90%; max-width: 800px;
+            max-height: 60vh; overflow-y: auto;
+        }
 
         /* TIÊU ĐỀ SYNC LIST */
         h1.main-title {
-            font-size: 6.5rem;
-            margin: 0;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            line-height: 1;
-            background: linear-gradient(to bottom, 
-                var(--title-top) 0%, 
-                var(--title-top) 40%, 
-                var(--primary-cyan) 50%, 
-                var(--primary-cyan) 60%,
-                var(--primary-cyan) 100%
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6))
-                    drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
+            font-size: 6.5rem; margin: 0; font-weight: 900;
+            text-transform: uppercase; text-align: center; line-height: 1;
+            background: linear-gradient(to bottom, var(--title-top) 40%, var(--primary-cyan) 60%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6));
         }
 
-        .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; }
+        .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; text-align: center; }
 
-        .level-list { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 15px; }
-        
-        /* Chỉnh sửa Card để hỗ trợ ẩn/hiện khi search */
+        /* LEVEL CARD TRONG DANH SÁCH */
+        .level-list { width: 100%; max-width: 800px; margin: 0 auto; }
         .level-card {
             background: var(--card-bg); border: 2px solid var(--rank-1);
             border-radius: 20px; padding: 25px; display: flex;
-            align-items: center; justify-content: space-between;
-            transition: 0.3s;
+            align-items: center; justify-content: space-between; margin-bottom: 15px;
         }
-        .level-card.hidden { display: none; } /* Class để ẩn level không khớp */
 
         .id-badge {
-            font-family: 'Courier New', Courier, monospace;
-            background: rgba(0, 206, 209, 0.1); color: var(--primary-cyan);
-            padding: 2px 8px; border-radius: 5px; font-weight: bold;
-        }
-
-        .submit-note {
-            margin-top: 40px; padding: 20px; border: 1px dashed var(--border);
-            border-radius: 15px; font-size: 0.95rem; text-align: center; opacity: 0.8;
+            font-family: monospace; background: rgba(0, 206, 209, 0.1);
+            color: var(--primary-cyan); padding: 2px 8px; border-radius: 5px;
         }
 
         .btn-cyan {
-            background: var(--primary-cyan); border: none; padding: 12px 30px; border-radius: 12px;
-            color: #000; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+            background: var(--primary-cyan); border: none; padding: 12px 30px;
+            border-radius: 12px; font-weight: 800; cursor: pointer;
         }
 
-        .news-container { max-width: 600px; width: 100%; background: var(--card-bg); border-radius: 25px; padding: 40px; border: 1px solid var(--border); }
-        .fun-fact { background: rgba(0, 206, 209, 0.05); padding: 25px; border-radius: 15px; border-left: 6px solid var(--primary-cyan); font-size: 1.2rem; margin-bottom: 10px; }
-        .news-date { font-size: 0.85rem; opacity: 0.6; text-align: right; font-family: monospace; margin-bottom: 25px; }
+        .page-section { display: none; padding: 40px 20px; animation: fadeIn 0.4s; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
+        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); margin-top: auto; }
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
-
-        @media (max-width: 768px) { h1.main-title { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo" onclick="showSection('home')">Sync List</div>
-        <nav>
-            <div class="search-container">
-                <input type="text" id="searchInput" onkeyup="searchLevel()" placeholder="Search levels...">
-                <span>🔍</span>
-            </div>
-            <a class="nav-link" onclick="showSection('home')">Home</a>
-            <a class="nav-link" onclick="showSection('news')">News</a>
+        <nav style="display: flex; gap: 20px; align-items: center;">
+            <div class="search-trigger" onclick="openSearch()">Search Levels... 🔍</div>
+            <a onclick="showSection('home')" style="cursor:pointer; font-weight:600;">Home</a>
+            <a onclick="showSection('news')" style="cursor:pointer; font-weight:600;">News</a>
             <button id="theme-btn">🌙</button>
         </nav>
     </header>
+
+    <div id="searchModal">
+        <span class="close-search" onclick="closeSearch()">✕</span>
+        <div class="search-box-large">
+            <input type="text" id="largeSearchInput" onkeyup="liveSearch()" placeholder="Type level or creator name..." autofocus>
+        </div>
+        <div id="searchResults">
+            </div>
+    </div>
 
     <main id="home-section" class="page-section active">
         <h1 class="main-title">SYNC LIST</h1>
         <p class="tip-text">Tip: Change to dark mode for best experiment.</p>
 
-        <div class="level-list" id="levelContainer">
+        <div class="level-list" id="mainLevelList">
             <div class="level-card">
                 <div style="display: flex; align-items: center; gap: 25px;">
                     <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
                     <div style="text-align: left;">
-                        <p class="level-title" style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text);">Montagem Rebola Layout</p>
-                        <p style="opacity: 0.7; margin: 5px 0;">by <strong class="level-creator">plusgdinues</strong></p>
-                        <p style="font-size: 0.85rem; opacity: 0.8;">ID: <span class="id-badge">133284474</span> • SONG CLICK SYNC</p>
+                        <p class="l-title" style="font-size: 1.6rem; font-weight: 800; margin: 0;">Montagem Rebola Layout</p>
+                        <p style="opacity: 0.7; margin: 5px 0;">by <strong class="l-creator">plusgdinues</strong></p>
+                        <p style="font-size: 0.85rem;">ID: <span class="id-badge">133284474</span></p>
                     </div>
                 </div>
-                <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
-            </div>
-
-            <div class="submit-note" id="submitNote">
-                Want to submit a level? Send <strong>ID & Video</strong> to: <br>
-                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary-cyan); text-decoration: none; font-weight: bold;">nguoivinhloc@gmail.com</a>
             </div>
         </div>
     </main>
 
     <main id="news-section" class="page-section">
-        <h1>LATEST NEWS</h1>
-        <div class="news-container">
-            <div class="fun-fact">
-                💡 <strong>Fun fact:</strong> <br>
-                The first top 1 level (Creator: <strong>plusgdinues</strong>) is my level (LOL) 🤣
-            </div>
-            <div class="news-date">Posted on: 13/02/2026, 17:23 PM</div>
-            <div style="text-align: center;">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h1>LATEST NEWS</h1>
+            <div style="background: var(--card-bg); padding: 40px; border-radius: 25px; border: 1px solid var(--border);">
+                <p>💡 <strong>Fun fact:</strong> The first top 1 level is my level (LOL) 🤣</p>
+                <p style="font-size: 0.8rem; opacity: 0.5;">Posted on: 13/02/2026, 17:23 PM</p>
                 <button onclick="showSection('home')" class="btn-cyan">Back to Home</button>
             </div>
         </div>
@@ -181,32 +171,44 @@
     <footer>Copyright © 2026 HUNG [GD] - All right reversed</footer>
 
     <script>
-        // HÀM TÌM KIẾM LEVEL
-        function searchLevel() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('level-card');
-            let note = document.getElementById('submitNote');
-
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].querySelector('.level-title').innerText.toLowerCase();
-                let creator = cards[i].querySelector('.level-creator').innerText.toLowerCase();
-                
-                if (title.includes(input) || creator.includes(input)) {
-                    cards[i].classList.remove('hidden');
-                } else {
-                    cards[i].classList.add('hidden');
-                }
-            }
-            
-            // Ẩn dòng Note nếu đang tìm kiếm để giao diện gọn hơn
-            if (input !== "") { note.style.display = "none"; } 
-            else { note.style.display = "block"; }
+        // Mở cửa sổ tìm kiếm
+        function openSearch() {
+            document.getElementById('searchModal').style.display = 'flex';
+            document.getElementById('largeSearchInput').focus();
         }
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId + '-section').classList.add('active');
-            window.scrollTo(0, 0);
+        // Đóng cửa sổ tìm kiếm
+        function closeSearch() {
+            document.getElementById('searchModal').style.display = 'none';
+            document.getElementById('largeSearchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+
+        // Tìm kiếm và hiển thị kết quả ngay trong cửa sổ lớn
+        function liveSearch() {
+            let query = document.getElementById('largeSearchInput').value.toLowerCase();
+            let resultsContainer = document.getElementById('searchResults');
+            let allLevels = document.querySelectorAll('#mainLevelList .level-card');
+            
+            resultsContainer.innerHTML = ''; // Xóa kết quả cũ
+
+            if (query === "") return;
+
+            allLevels.forEach(card => {
+                let title = card.querySelector('.l-title').innerText.toLowerCase();
+                let creator = card.querySelector('.l-creator').innerText.toLowerCase();
+
+                if (title.includes(query) || creator.includes(query)) {
+                    let clone = card.cloneNode(true); // Tạo bản sao của level card
+                    clone.style.borderColor = "var(--primary-cyan)";
+                    resultsContainer.appendChild(clone);
+                }
+            });
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id + '-section').classList.add('active');
         }
 
         const themeBtn = document.getElementById('theme-btn');
