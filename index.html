@@ -6,9 +6,9 @@
     <title>Sync List - Geometry Dash</title>
     <style>
         :root {
-            --primary: #00ffff;
+            --primary-cyan: #00ced1; /* Cyan đậm hơn (Dark Turquoise) */
             --bg: #ffffff;
-            --text: #1a1a1a;
+            --text: #1a1a1a; /* Toàn bộ chữ trang là màu đen */
             --card-bg: #f9f9f9;
             --header-bg: rgba(255, 255, 255, 0.95);
             --border: #eeeeee;
@@ -18,7 +18,7 @@
 
         [data-theme="dark"] {
             --bg: #0d0d0d;
-            --text: #ffffff;
+            --text: #ffffff; /* Chuyển sang trắng khi bật Dark Mode để đọc được */
             --card-bg: #161616;
             --header-bg: rgba(13, 13, 13, 0.95);
             --border: #222222;
@@ -29,6 +29,7 @@
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
+            color: var(--text); /* Áp dụng màu đen cho toàn trang */
             transition: 0.3s;
             min-height: 100vh;
             display: flex;
@@ -46,7 +47,11 @@
             position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo { font-size: 1.4rem; font-weight: 900; color: var(--primary); text-transform: uppercase; cursor: pointer; }
+        .logo { 
+            font-size: 1.4rem; font-weight: 900; 
+            color: var(--text); /* Logo cũng màu đen */
+            text-transform: uppercase; cursor: pointer; 
+        }
 
         nav { display: flex; gap: 20px; align-items: center; }
 
@@ -65,7 +70,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* HIỆU ỨNG TRỘN MÀU NẰM Ở ĐÂY */
+        /* HIỆU ỨNG CHỮ SYNC LIST TRỘN MÀU CYAN ĐẬM */
         h1.main-title {
             font-size: 6.5rem;
             margin-bottom: 30px;
@@ -73,18 +78,18 @@
             text-transform: uppercase;
             text-align: center;
             line-height: 1;
-            /* Thay đổi thông số 45% - 55% để tạo độ nhòe "trộn màu" */
+            /* Gradient trộn màu: đen trên, cyan đậm dưới */
             background: linear-gradient(to bottom, 
                 var(--title-top) 0%, 
-                var(--title-top) 42%, 
-                var(--primary) 50%, 
-                var(--primary) 58%,
-                var(--primary) 100%
+                var(--title-top) 40%, 
+                var(--primary-cyan) 50%, 
+                var(--primary-cyan) 60%,
+                var(--primary-cyan) 100%
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* Glow bên ngoài nhẹ để bổ trợ cho việc trộn màu */
-            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
+            /* Glow nội tại và ngoại tại nhẹ */
+            filter: drop-shadow(0 0 10px rgba(0, 206, 209, 0.3));
         }
 
         .level-list { width: 100%; max-width: 800px; }
@@ -94,6 +99,9 @@
             align-items: center; justify-content: space-between;
         }
 
+        /* Tên level và các thành phần khác dùng màu mặc định (Đen) */
+        .level-name { font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--text); }
+
         .news-container {
             max-width: 600px; width: 100%;
             background: var(--card-bg); border-radius: 25px;
@@ -101,14 +109,15 @@
         }
 
         .fun-fact {
-            background: rgba(0, 255, 255, 0.1); padding: 25px; 
-            border-radius: 15px; border-left: 6px solid var(--primary);
+            background: rgba(0, 0, 0, 0.05); /* Nền xám nhẹ thay vì cyan */
+            padding: 25px; border-radius: 15px; border-left: 6px solid var(--text);
             font-size: 1.2rem; margin-bottom: 10px;
         }
 
         .news-date { font-size: 0.85rem; opacity: 0.6; text-align: right; font-family: monospace; margin-bottom: 25px; }
 
-        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; color: var(--text); }
+        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
+        
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
 
         @media (max-width: 768px) { h1.main-title { font-size: 3.5rem; } }
@@ -136,9 +145,9 @@
                 <div style="display: flex; align-items: center; gap: 25px;">
                     <div style="font-size: 2.5rem; font-weight: 900; color: var(--rank-1);">#1</div>
                     <div style="text-align: left;">
-                        <p style="font-size: 1.6rem; font-weight: 800; margin: 0; color: var(--primary);">Montagem Rebola Layout</p>
+                        <p class="level-name">Montagem Rebola Layout</p>
                         <p style="opacity: 0.7; margin: 5px 0;">by <strong>plusgdinues</strong></p>
-                        <p style="font-size: 0.85rem; opacity: 0.6;">ID: [WAITING...] • SONG CLICK SYNC</p>
+                        <p style="font-size: 0.85rem; opacity: 0.6; font-family: monospace;">ID: [WAITING...] • SONG CLICK SYNC</p>
                     </div>
                 </div>
                 <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
@@ -155,7 +164,7 @@
             </div>
             <div class="news-date">Posted on: 13/02/2026, 17:23 PM</div>
             <div style="text-align: center;">
-                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer;">Back to Home</button>
+                <button onclick="showSection('home')" style="background: var(--text); border: none; padding: 10px 25px; border-radius: 12px; color: var(--bg); font-weight: bold; cursor: pointer;">Back to Home</button>
             </div>
         </div>
     </main>
