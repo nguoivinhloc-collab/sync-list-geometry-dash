@@ -35,7 +35,6 @@
             flex-direction: column;
         }
 
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -56,7 +55,6 @@
 
         nav { display: flex; gap: 20px; align-items: center; }
 
-        /* Search Bar */
         .search-container {
             display: flex;
             align-items: center;
@@ -64,10 +62,7 @@
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 5px 15px;
-            transition: 0.3s;
         }
-
-        .search-container:focus-within { border-color: var(--primary); }
 
         .search-container input {
             border: none; background: transparent; color: var(--text);
@@ -81,7 +76,6 @@
 
         .nav-link:hover { color: var(--primary); }
 
-        /* Content Sections */
         .page-section { display: none; padding: 40px 20px; flex: 1; animation: fadeIn 0.4s ease; }
         .page-section.active { display: flex; flex-direction: column; align-items: center; }
 
@@ -89,20 +83,18 @@
 
         h1 { font-size: 3.5rem; margin-bottom: 30px; font-weight: 900; text-transform: uppercase; text-align: center; }
 
-        /* Level Card Top 1 */
         .level-list { width: 100%; max-width: 800px; }
         .level-card {
             background: var(--card-bg); border: 2px solid var(--rank-1);
             border-radius: 20px; padding: 25px; display: flex;
             align-items: center; justify-content: space-between;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
         }
 
-        /* News Page Styling */
         .news-container {
             max-width: 600px; width: 100%;
             background: var(--card-bg); border-radius: 25px;
             padding: 40px; border: 1px solid var(--border);
+            position: relative;
         }
 
         .fun-fact {
@@ -110,15 +102,22 @@
             padding: 25px; border-radius: 15px;
             border-left: 6px solid var(--primary);
             font-size: 1.2rem; line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            text-align: right;
+            font-family: monospace;
+            margin-bottom: 25px;
         }
 
         footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
-
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
 
         @media (max-width: 768px) {
             header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -161,10 +160,13 @@
                 💡 <strong>Fun fact:</strong> <br>
                 The first top 1 level (Creator: <strong>plusgdinues</strong>) is my level (LOL) 🤣
             </div>
-            <p style="margin-top: 30px; opacity: 0.5; font-size: 0.9rem; text-align: center;">
-                Check back later for more updates!
-            </p>
-            <button onclick="showSection('home')" style="margin-top: 20px; background: var(--primary); border: none; padding: 10px 20px; border-radius: 10px; color: #000; font-weight: bold; cursor: pointer;">Back to Home</button>
+            <div class="news-date">
+                Posted on: 13/02/2026, 17:23 PM
+            </div>
+            
+            <div style="border-top: 1px solid var(--border); padding-top: 20px; text-align: center;">
+                <button onclick="showSection('home')" style="background: var(--primary); border: none; padding: 10px 25px; border-radius: 12px; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;">Back to Home</button>
+            </div>
         </div>
     </main>
 
@@ -173,20 +175,14 @@
     </footer>
 
     <script>
-        // Chuyển trang (Section Switching)
         function showSection(sectionId) {
-            // Ẩn tất cả các section
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
             });
-            // Hiện section được chọn
             document.getElementById(sectionId + '-section').classList.add('active');
-            
-            // Cuộn lên đầu trang
             window.scrollTo(0, 0);
         }
 
-        // Theme Toggle
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.onclick = () => {
             if (document.body.hasAttribute('data-theme')) {
