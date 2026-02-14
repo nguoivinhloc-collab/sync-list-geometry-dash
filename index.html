@@ -67,7 +67,7 @@
         /* TIÊU ĐỀ SYNC LIST */
         h1.main-title {
             font-size: 6.5rem;
-            margin-bottom: 30px;
+            margin: 0;
             font-weight: 900;
             text-transform: uppercase;
             text-align: center;
@@ -85,6 +85,14 @@
                     drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
         }
 
+        /* DÒNG TIP NHỎ */
+        .tip-text {
+            font-size: 0.9rem;
+            margin: 10px 0 40px 0;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
         .level-list { width: 100%; max-width: 800px; }
         .level-card {
             background: var(--card-bg); border: 2px solid var(--rank-1);
@@ -92,38 +100,31 @@
             align-items: center; justify-content: space-between;
         }
 
-        .news-container {
-            max-width: 600px; width: 100%;
-            background: var(--card-bg); border-radius: 25px;
-            padding: 40px; border: 1px solid var(--border);
+        /* DÒNG HƯỚNG DẪN GỬI EMAIL */
+        .submit-note {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px dashed var(--border);
+            border-radius: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+            opacity: 0.8;
         }
 
-        .fun-fact {
-            background: rgba(0, 206, 209, 0.05);
-            padding: 25px; border-radius: 15px; border-left: 6px solid var(--primary-cyan);
-            font-size: 1.2rem; margin-bottom: 10px;
-        }
+        .submit-note strong { color: var(--primary-cyan); }
 
-        /* NÚT BACK TO HOME MÀU CYAN ĐẬM */
         .btn-cyan {
-            background: var(--primary-cyan);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 12px;
-            color: #000; /* Chữ đen cho dễ đọc trên nền cyan */
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
+            background: var(--primary-cyan); border: none;
+            padding: 12px 30px; border-radius: 12px;
+            color: #000; font-weight: 800; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 206, 209, 0.3);
         }
 
-        .btn-cyan:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 206, 209, 0.5);
-            filter: brightness(1.1);
-        }
+        .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 206, 209, 0.5); }
 
+        .news-container { max-width: 600px; width: 100%; background: var(--card-bg); border-radius: 25px; padding: 40px; border: 1px solid var(--border); }
+        .fun-fact { background: rgba(0, 206, 209, 0.05); padding: 25px; border-radius: 15px; border-left: 6px solid var(--primary-cyan); font-size: 1.2rem; margin-bottom: 10px; }
         .news-date { font-size: 0.85rem; opacity: 0.6; text-align: right; font-family: monospace; margin-bottom: 25px; }
 
         footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
@@ -138,7 +139,7 @@
         <div class="logo" onclick="showSection('home')">Sync List</div>
         <nav>
             <div class="search-container">
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search levels...">
                 <span>🔍</span>
             </div>
             <a class="nav-link" onclick="showSection('home')">Home</a>
@@ -149,6 +150,8 @@
 
     <main id="home-section" class="page-section active">
         <h1 class="main-title">SYNC LIST</h1>
+        <p class="tip-text">Tip: Change to dark mode for best experiment.</p>
+
         <div class="level-list">
             <div class="level-card">
                 <div style="display: flex; align-items: center; gap: 25px;">
@@ -161,11 +164,16 @@
                 </div>
                 <div style="font-size: 0.8rem; background: #444; color: #fff; padding: 5px 12px; border-radius: 10px; opacity: 0.5;">NO VIDEO</div>
             </div>
+
+            <div class="submit-note">
+                Want to submit a level? Send <strong>ID & Video</strong> to: <br>
+                <a href="mailto:nguoivinhloc@gmail.com" style="color: var(--primary-cyan); text-decoration: none; font-weight: bold;">nguoivinhloc@gmail.com</a>
+            </div>
         </div>
     </main>
 
     <main id="news-section" class="page-section">
-        <h1 style="color: var(--text);">LATEST NEWS</h1>
+        <h1>LATEST NEWS</h1>
         <div class="news-container">
             <div class="fun-fact">
                 💡 <strong>Fun fact:</strong> <br>
