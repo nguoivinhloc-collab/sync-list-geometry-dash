@@ -6,7 +6,7 @@
     <title>Sync List - Geometry Dash</title>
     <style>
         :root {
-            --primary-cyan: #00ced1;
+            --primary-cyan: #00ced1; /* Deep Cyan */
             --bg: #ffffff;
             --text: #000000;
             --card-bg: #f9f9f9;
@@ -60,13 +60,14 @@
             color: white; font-size: 2.5rem; outline: none; padding: 10px;
         }
 
-        /* TITLE & TIP */
+        /* TITLE & GLOW EFFECT */
         h1.main-title {
             font-size: 6.5rem; margin: 40px 0 0 0; font-weight: 900;
             text-transform: uppercase; text-align: center; line-height: 1;
             background: linear-gradient(to bottom, var(--title-top) 40%, var(--primary-cyan) 60%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6));
+            filter: drop-shadow(0 0 15px rgba(0, 206, 209, 0.6))
+                    drop-shadow(0 0 30px rgba(0, 206, 209, 0.2));
         }
         .tip-text { font-size: 0.9rem; margin: 10px 0 40px 0; opacity: 0.6; font-style: italic; text-align: center; }
 
@@ -87,6 +88,7 @@
             background: rgba(0, 206, 209, 0.05); border: 2px dashed var(--primary-cyan);
             border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 40px;
         }
+        .submit-info a { color: var(--primary-cyan); text-decoration: none; font-weight: bold; }
 
         /* NEWS ARTICLES */
         .news-article {
@@ -111,9 +113,12 @@
         .btn-cyan {
             background: var(--primary-cyan); border: none; padding: 12px 25px;
             border-radius: 10px; font-weight: bold; cursor: pointer; color: #000;
+            box-shadow: 0 4px 10px rgba(0, 206, 209, 0.2);
         }
 
         #theme-btn { background: none; border: 1px solid var(--border); padding: 7px; border-radius: 50%; cursor: pointer; color: var(--text); }
+
+        @media (max-width: 768px) { h1.main-title { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
@@ -143,7 +148,10 @@
         <div class="level-list">
             <div class="submit-info">
                 <strong>WANT TO SUBMIT A LEVEL?</strong><br>
-                Send ID & Video link to: <a href="mailto:nguoivinhloc@gmail.com" style="color:var(--primary-cyan); font-weight:bold;">nguoivinhloc@gmail.com</a>
+                Send ID & Video link to:<br>
+                <a href="mailto:nguoivinhloc@gmail.com">nguoivinhloc@gmail.com</a><br>
+                <span style="opacity: 0.6; font-size: 0.8rem;">Backup:</span> 
+                <a href="mailto:tuanhungtran678@gmail.com">tuanhungtran678@gmail.com</a>
             </div>
 
             <div id="mainLevelList">
@@ -153,15 +161,16 @@
                         <div>
                             <p class="l-title" style="font-size: 1.4rem; font-weight: 800; margin: 0;">Montagem Rebola Layout</p>
                             <p style="opacity: 0.7; margin: 5px 0;">by <strong class="l-creator">plusgdinues</strong></p>
-                            <p style="font-size: 0.8rem; opacity: 0.6;">ID: 133284474</p>
+                            <p style="font-size: 0.8rem; opacity: 0.8;">ID: <span style="font-family:monospace; background:rgba(0,206,209,0.1); padding:2px 5px; border-radius:4px;">133284474</span></p>
                         </div>
                     </div>
+                    <div style="font-size: 0.7rem; background: #444; color: #fff; padding: 4px 8px; border-radius: 8px; opacity: 0.5;">NO VIDEO</div>
                 </div>
                 
                 <script>
                     for(let i=2; i<=10; i++) {
                         document.write(`
-                        <div class="level-card" style="opacity: 0.5;">
+                        <div class="level-card" style="opacity: 0.4;">
                             <div style="display: flex; align-items: center; gap: 20px;">
                                 <div class="rank-number">#${i}</div>
                                 <div>
@@ -189,9 +198,9 @@
             </div>
 
             <div class="news-article">
-                <span class="news-tag">FUN FACT</span>
-                <h2 style="margin: 15px 0 10px 0;">Developer Insight</h2>
-                <p>The creator of the current Top 1 level is also the one who built this list. Talk about a "host advantage"! 🤣</p>
+                <span class="news-tag">INSIGHT</span>
+                <h2 style="margin: 15px 0 10px 0;">Development Update</h2>
+                <p>New features added: Fullscreen search engine, dual-email submission support, and a dedicated News page. Stay tuned for more!</p>
                 <p style="font-size: 0.8rem; opacity: 0.5;">Feb 13, 2026</p>
             </div>
 
@@ -204,6 +213,7 @@
     <footer>Copyright © 2026 HUNG [GD] - All rights reserved</footer>
 
     <script>
+        // Modal Search Logic
         function openSearch() { document.getElementById('searchModal').style.display = 'flex'; document.getElementById('largeSearchInput').focus(); }
         function closeSearch() { document.getElementById('searchModal').style.display = 'none'; }
         
@@ -219,17 +229,20 @@
                 if (title.includes(query) || creator.includes(query)) {
                     let clone = card.cloneNode(true);
                     clone.style.opacity = "1";
+                    clone.style.border = "1px solid var(--primary-cyan)";
                     resultsContainer.appendChild(clone);
                 }
             });
         }
 
+        // Navigation Logic
         function showSection(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id + '-section').classList.add('active');
             window.scrollTo(0,0);
         }
 
+        // Theme Logic
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.onclick = () => {
             if (document.body.hasAttribute('data-theme')) {
